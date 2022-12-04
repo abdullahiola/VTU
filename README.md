@@ -4,13 +4,13 @@
 
 Clone the project 
 ```
-git clone https://github.com/zuri-training/price_compare_team_27.git 
+git clone https://github.com/abdullahiola/VTU.git
 ```
 
 Enter the project directory 
 
 ```
-cd price_compare_team_27
+cd VTU
 ```
 
 Create a virtual env
