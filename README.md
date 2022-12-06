@@ -4,7 +4,7 @@
 What is topify ? Topify is a vtu platform built for vendors which enables them perform various subscriptions such as data, airtime subscription and more.
 
 ### Figma Link
-> [Team Topify Figma ]()
+> [Team Topify Figma ](https://www.figma.com/file/uDuDEveBh2Zy3srvToYX1J/voom?node-id=277%3A22972&t=RbaU6KeVIPKbA3Xx-1)
 
 
 ### Project Documentation
