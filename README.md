@@ -1,10 +1,10 @@
 # VTU Project
 
 ### Topify 
-What is topify ? Topify is a vtu platform built for vendors which enables them perform various subscriptions such as datv, airtime subscription and more.
+What is topify ? Topify is a vtu platform built for vendors which enables them perform various subscriptions such as data, airtime subscription and more.
 
 ### Figma Link
-> [Team Topify Figma ]()
+> [Team Topify Figma ](https://www.figma.com/file/uDuDEveBh2Zy3srvToYX1J/voom?node-id=277%3A22972&t=RbaU6KeVIPKbA3Xx-1)
 
 
 ### Project Documentation
@@ -12,7 +12,7 @@ What is topify ? Topify is a vtu platform built for vendors which enables them p
 
 Clone the project 
 ```
-git clone https://github.com/abdullahiola/VTU.git
+git clone  https://github.com/Topperize/VTU.git
 ```
 
 Enter the project directory 
@@ -66,15 +66,4 @@ python manage.py runserver
 
 ## To contribute :
 
-### NOTE :
-
-- Don't push to the main branch
-- Create a branch and switch to it ` git checkout -b (branchname)` *Dont include brackets*
-- After finishing your tasks run `git pull origin main ` then `git push (your branchname)`
-
-```
-git add .
-git commit -m " The task you did "
-git push branchname 
-
-```
+see **[Contribution.md](https://github.com/Topperize/VTU/blob/main/Contribution.md)**
