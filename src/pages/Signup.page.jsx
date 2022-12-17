@@ -13,9 +13,9 @@ const Signup = () => {
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required("This field is required"),
-    password: Yup.string().min(6).required("This field is required"),
-    refCode: Yup.string().min(6).required("This field is required"),
+    email: Yup.string().email("Invalid email format").required("This field is required"),
+    password: Yup.string().min(7, "Password cannot be less than 7 characters").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/, "Password should contain at least one capital letter, one small letter and one number (e.g Johndoe1)").required("This field is required"),
+    refCode: Yup.string().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,7}$/, "Invalid code , Please input a correct  referral code").required("This field is required"),
   })
 
   const initialValues = {
