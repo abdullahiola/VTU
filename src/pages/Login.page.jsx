@@ -5,20 +5,17 @@ import * as Yup from 'yup'
 import FormikComponent from '../components/form/FormikComponent'
 import { Link } from 'react-router-dom'
 import LogoHeader from '../components/utilities/LogoHeader'
-import { AppContext } from '../context/AppContext'
 
 
 const Login = () => {
-
-  const {headerLogoHeight} = useContext(AppContext)
 
   const onSubmit = (values) => {
     console.log(values);
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required("This field is required"),
-    password: Yup.string().min(6).required("This field is required"),
+    email: Yup.string().email("Invalid email format").required("This field is required"),
+    password: Yup.string().min(7, "Password cannot be less than 7 characters").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/, "Password should contain at least one capital letter, one small letter and one number (e.g Johndoe1)").required("This field is required"),
   })
 
   const initialValues = {

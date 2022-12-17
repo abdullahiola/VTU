@@ -5,24 +5,19 @@ import * as Yup from 'yup'
 import FormikComponent from '../components/form/FormikComponent'
 import { Link } from 'react-router-dom'
 import LogoHeader from '../components/utilities/LogoHeader'
-import { AppContext } from '../context/AppContext'
 
 const ResetPassword = () => {
-
-  const {headerLogoHeight} = useContext(AppContext)
 
   const onSubmit = (values) => {
     console.log(values);
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required("This field is required"),
-    password: Yup.string().min(6).required("This field is required"),
+    email: Yup.string().email("Invalid email format").required("This field is required")
   })
 
   const initialValues = {
-    email: '',
-    password: '',
+    email: ''
   }
 
 
