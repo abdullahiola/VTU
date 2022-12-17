@@ -15,7 +15,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <AppContextProvider>
-          <div className="App">
+          <div className=" bg-white font-normal text-base text-dark">
             <Routes>
               <Route path="/" element={<Home/>} />
               <Route path="/login" element={<Login />} />
