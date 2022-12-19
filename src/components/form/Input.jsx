@@ -1,5 +1,5 @@
 import { ErrorMessage, Field } from 'formik'
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import ErrorMsg from './ErrorMsg';
 import {MdOutlineCancel} from 'react-icons/md'
@@ -8,8 +8,7 @@ import Alert from '../../assets/media/alert.svg'
 
 const Input = (props) => {
   
-  const {id, name, type, label, meta} = props;
-  const [visibility, setVisibility] = useState(false)
+  const {id, name, type, label} = props;
 
   const getStyle = (param, field) => {
 
@@ -26,7 +25,6 @@ const Input = (props) => {
       }
     }
   }
-  
 
   return (
     <div className="field--control mb-10">
@@ -67,7 +65,7 @@ const Input = (props) => {
                 : 
                 <>
                   <input
-                    type={(visibility?'text':'password')}
+                    type={(props?.visibility[name]?'text':'password')}
                     id={id}
                     {...field}
                     style={getStyle(form, field)}
@@ -75,7 +73,7 @@ const Input = (props) => {
                     className='block w-full text-base outline-none text-dark-200 p-4 border border-gray-200 rounded-lg bg-[calc(100%-18px)] bg-no-repeat placeholder:text-gray-100 focus:border-[#37C779]'
                   />
                   <div 
-                    onClick={() => setVisibility(visibility => !visibility)}
+                    onClick={() => props?.setVisibility({...props?.visibility, [name]: !(props?.visibility[name])})}
                     style={{
                       backgroundColor: (form.touched[field?.name] && !form.errors[field?.name]) ? '#D7F4E4' : '',
                       zIndex: (form.touched[field?.name] && form.errors[field?.name]) ? -2 : ''
@@ -83,7 +81,7 @@ const Input = (props) => {
                     className='absolute right-[2px] top-[2px] bottom-[2px] rounded-lg z-[2] w-[38px] flex items-center pl-1 bg-white'
                   >
                     {
-                      visibility ? 
+                      props.visibility[name] ? 
                       <AiOutlineEyeInvisible
                         className=' text-[20px] text-gray-400 cursor-pointer aspect-square'
                       /> :
@@ -94,7 +92,6 @@ const Input = (props) => {
                   </div>
                 </>
                 }
-               
             </div> 
           )
         }
