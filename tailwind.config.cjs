@@ -84,7 +84,46 @@ module.exports = {
       accent: "#F4E8D3"
       // ...
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        zoom: {
+          '0%': {transform: 'scale(0)'},
+          '10%': {transform: 'scale(0.1)'},
+          '20%': {transform: 'scale(0.2)'},
+          '30%': {transform: 'scale(0.3)'},
+          '40%': {transform: 'scale(0.4)'},
+          '50%': {transform: 'scale(0.5)'},
+          '60%': {transform: 'scale(0.6)'},
+          '70%': {transform: 'scale(0.7)'},
+          '80%': {transform: 'scale(0.8)'},
+          '90%': {transform: 'scale(0.9)'},
+          '100%': {transform: 'scale(1)'},
+        },
+        loading: {
+          '0%': {
+            transform: 'scale(1)' //1: 1
+          },
+          '25%': {
+            transform: 'scale(1.2)' //4: 1.5
+          },
+          '50%': {
+            transform: 'scale(1.25)', //5: 1.75
+          },
+          '75%': {
+            transform: 'scale(1.05)', //2: 1.1
+            background: 'rgb(107 114 128 / 0.85)',
+        },
+          '100%': {
+            transform: 'scale(1.1)', //3: 1.15
+            background: 'rgb(107 114 128 / 0.85)',
+          },
+        }
+      },
+      animation: {
+        zoom: 'zoom 200ms 1 ease-in-out',
+        loading: 'loading 2s infinite ease',
+      }
+    },
   },
   plugins: [],
 }

@@ -5,22 +5,24 @@ import AppContextProvider from "./context/AppContext"
 import Error from "./pages/Error.page"
 import Home from "./pages/Home.page"
 import Login from "./pages/Login.page"
+import ResetConfirmation from "./pages/ResetConfirmation.page"
 import ResetPassword from "./pages/ResetPassword.page"
 import Signup from "./pages/Signup.page"
 
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <AppContextProvider>
-          <div className=" bg-white font-normal text-base text-dark">
+          <div className=" app bg-white font-normal text-base text-dark">
             <Routes>
               <Route path="/" element={<Home/>} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/reset" element={<ResetPassword />} />
+              <Route path="/confirm-reset" element={<ResetConfirmation />} />
               <Route path="*" element={<Error />} />
             </Routes>
           </div>
