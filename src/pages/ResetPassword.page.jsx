@@ -1,15 +1,51 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import DownloadMobile from '../components/utilities/DownloadMobile'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import FormikComponent from '../components/form/FormikComponent'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LogoHeader from '../components/utilities/LogoHeader'
+import { useUserData } from '../hooks/useUserData'
+import { AppContext } from '../context/AppContext'
+import Loading from '../components/utilities/Loading'
+import Modal from '../components/utilities/Modal'
 
 const ResetPassword = () => {
 
+  const {data, isError, error, isLoading, refetch} = useUserData()
+  const {setValidateUserAccess, setUserId} = useContext(AppContext)
+  const [errorState, setErrorState] = useState(false)
+  const [networkError, setNetworkError] = useState(false)
+  const emailRef = useRef(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isError) {
+      setErrorState(true)
+    }
+    
+  }, [isError])
+
+  useEffect(() => {
+    if (data?.data) {
+      const userData =  data.data.filter(user => {
+        return user.email === emailRef.current
+      })
+      if (userData.length) {
+        setErrorState(false)
+        setValidateUserAccess(true)
+        setUserId(userData[0].id)
+        navigate("/confirm-reset")
+      } else if (!userData.length && emailRef.current) {
+        setErrorState(true)
+      }
+    }
+  
+  }, [data])
+  
   const onSubmit = (values) => {
-    console.log(values);
+    emailRef.current = values.email
+    refetch()
   }
 
   const validationSchema = Yup.object({
@@ -20,9 +56,26 @@ const ResetPassword = () => {
     email: ''
   }
 
+  const closeErrorModal = () => { 
+    setErrorState(false)
+   }
+
+   const closeNetworkErrorModal = () => {
+    setNetworkError(false)
+  }
+
 
   return (
     <div className='min-h-screen'>
+      {
+        isLoading && <Loading />
+      }
+      {
+        errorState && <Modal closeModal={closeErrorModal}>Email not found</Modal>
+      }
+      {
+        networkError && <Modal closeModal={closeNetworkErrorModal}>{error.message} <br />Please try again!</Modal>
+      }
       <LogoHeader />
       <div>
         <div className='px-6 h-full flex flex-col min-h-[728px] justify-between'>
@@ -38,7 +91,7 @@ const ResetPassword = () => {
                   return (
                     <Fragment>
                       <Form>
-                        <FormikComponent control='input' meta={formik} id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
+                        <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
                         <button className='submit__btn' type="submit">Submit</button>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Remembered your password? <Link to='/login' className=' text-purple hover:underline'>Log In</Link></span>
