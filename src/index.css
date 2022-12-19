@@ -29,7 +29,7 @@
 
 @layer components {
   .submit__btn {
-    @apply  block w-full py-[18px] px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase outline-0 hover:bg-green-700 focus:border-green-700 focus:bg-green-400;
+    @apply  block w-full py-[18px] px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase hover:bg-green-700 focus:bg-green-700;
   }
 }
 
