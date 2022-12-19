@@ -68,7 +68,7 @@ const Signup = () => {
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email format").required("This field is required"),
     password: Yup.string().min(7, "Password cannot be less than 7 characters").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/, "Password should contain at least one capital letter, one small letter and one number (e.g Johndoe1)").required("This field is required"),
-    refCode: Yup.string().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,7}$/, "Invalid code , Please input a correct  referral code").required("This field is required"),
+    refCode: Yup.string().matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,7}$/, "Invalid code , Please input a correct  referral code"),
   })
 
   const initialValues = {
@@ -114,7 +114,7 @@ const Signup = () => {
                       <Form>
                         <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
                         <FormikComponent control='input' id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility}/>
-                        <FormikComponent control='input' id='refCode' name='refCode' type='text' label='Referral code' required={true} />
+                        <FormikComponent control='input' id='refCode' name='refCode' type='text' label='Referral code' required={false} />
                         <button className='submit__btn' type="submit">Submit</button>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Already on voom?  <Link to='/login' className=' text-purple hover:underline'>Log In</Link></span>
