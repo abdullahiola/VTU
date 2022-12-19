@@ -40,13 +40,13 @@ module.exports = {
     },
     colors: {
       green: {
-        DEFAULT: '#37C779',
+        DEFAULT: '#00C297',
         100: '#D7F4E4',
-        200: '#cffafe',
-        300: '#a5f3fc',
+        200: '#CCF3EA',
+        300: '#80E0CB',
         400: '#7ADAA6',
-        500: '#67e8f9',
-        600: '#37C779',
+        500: '#2BCCA8',
+        600: '#00C297',
         700: '#008165'
       },
       purple: {
