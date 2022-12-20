@@ -120,6 +120,7 @@ module.exports = {
         }
       },
       animation: {
+        spin: 'spin 1.25s infinite ease-in-out',
         zoom: 'zoom 200ms 1 ease-in-out',
         loading: 'loading 2s infinite ease',
       }
