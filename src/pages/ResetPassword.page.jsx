@@ -68,9 +68,6 @@ const ResetPassword = () => {
   return (
     <div className='min-h-screen'>
       {
-        isLoading && <Loading />
-      }
-      {
         errorState && <Modal closeModal={closeErrorModal}>Email not found</Modal>
       }
       {
@@ -78,7 +75,7 @@ const ResetPassword = () => {
       }
       <LogoHeader />
       <div>
-        <div className='px-6 h-full flex flex-col min-h-[728px] justify-between'>
+        <div className='px-6 h-full flex flex-col min-h-[600px] justify-between'>
           <div className="pt-12 pb-16 mx-auto h-full w-full max-w-[360px]">
             <h6 className='text-center pb-8'>Reset Password</h6>
             <Formik
@@ -92,7 +89,10 @@ const ResetPassword = () => {
                     <Fragment>
                       <Form>
                         <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
-                        <button className='submit__btn' type="submit">Submit</button>
+                        <div className='w-full relative'>
+                          <button className='submit__btn' type="submit">Confirm</button>
+                          { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
+                        </div>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Remembered your password? <Link to='/login' className=' text-purple hover:underline'>Log In</Link></span>
                     </Fragment>

@@ -75,9 +75,6 @@ const Login = () => {
   return (
     <div className='min-h-screen'>
       {
-        isLoading && <Loading />
-      }
-      {
         errorState && <Modal closeModal={closeErrorModal}>Login parameters are invalid!</Modal> 
       }
       {
@@ -85,7 +82,7 @@ const Login = () => {
       }
       <LogoHeader />
       <div>
-        <div className='px-6 h-full flex flex-col min-h-[728px] justify-between'>
+        <div className='px-6 h-full flex flex-col min-h-[600px] justify-between'>
           <div className="pt-12 pb-16 mx-auto h-full w-full max-w-[360px]">
             <h6 className=' text-center pb-8'>Log In</h6>
             <Formik
@@ -100,7 +97,10 @@ const Login = () => {
                       <Form>
                         <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
                         <FormikComponent control='input' id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility} />
-                        <button className='submit__btn' type="submit">Submit</button>
+                        <div className='w-full relative'>
+                          <button className='submit__btn' type="submit">Login</button>
+                          { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
+                        </div>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Want to Join voom? <Link to='/signup' className=' text-purple hover:underline'>Sign Up</Link></span>
                     </Fragment>

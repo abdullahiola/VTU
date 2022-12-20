@@ -89,9 +89,6 @@ const ResetConfirmation = () => {
   return (
     <div className='min-h-screen'>
       {
-        queryLoading || mutateLoading && <Loading />
-      }
-      {
         errorState && <Modal closeModal={closeErrorModal}>Enter correct password</Modal> 
       }
       {
@@ -99,7 +96,7 @@ const ResetConfirmation = () => {
       }
       <LogoHeader />
       <div>
-        <div className='px-6 h-full flex flex-col min-h-[728px] justify-between'>
+        <div className='px-6 h-full flex flex-col min-h-[600px] justify-between'>
           <div className="pt-12 pb-16 mx-auto h-full w-full max-w-[360px]">
             <h6 className=' text-center pb-8'>Confirm New Password</h6>
             <Formik
@@ -114,7 +111,10 @@ const ResetConfirmation = () => {
                       <Form>
                         <FormikComponent control='input' id='oldPassword' name='oldPassword' type='password' label='Password: ' placeholder='********' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <FormikComponent control='input' id='newPassword' name='newPassword' type='password' label='New password: ' placeholder='********' required={true} visibility={visibility} setVisibility={setVisibility} />
-                        <button className='submit__btn' type="submit">Confirm</button>
+                        <div className='w-full relative'>
+                          <button className='submit__btn' type="submit">Confirm</button>
+                          { queryLoading || mutateLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
+                        </div>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Remembered your password? <Link to='/login' className=' text-purple hover:underline'>Login</Link></span>
                     </Fragment>
