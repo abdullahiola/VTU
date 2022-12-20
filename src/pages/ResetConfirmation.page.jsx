@@ -35,7 +35,7 @@ const ResetConfirmation = () => {
 
    useEffect(() => {
     if (isError) {
-      setErrorState(true)
+      setNetworkError(true)
     }
     
   }, [isError])
@@ -46,7 +46,7 @@ const ResetConfirmation = () => {
        if (userPassword === oldPasswordRef.current) {
         editUser({...data.data, password: newPasswordRef.current})
         reset(resetRef.current)
-      } else if (userPassword && (userPassword !== oldPasswordRef.current)) {
+      } else if ((userPassword && oldPasswordRef.current && newPasswordRef.current) && (userPassword !== oldPasswordRef.current)) {
         setErrorState(true)
       }
      }
@@ -113,7 +113,7 @@ const ResetConfirmation = () => {
                         <FormikComponent control='input' id='newPassword' name='newPassword' type='password' label='New password: ' placeholder='********' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <div className='w-full relative'>
                           <button className='submit__btn' type="submit">{(queryLoading ? "Verifying" : "Confirm") || (mutateLoading ? "Reseting" : "Confirm")}</button>
-                          { queryLoading || mutateLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
+                          { (queryLoading || mutateLoading) && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Remembered your password? <Link to='/login' className=' text-purple hover:underline'>Login</Link></span>
