@@ -98,7 +98,7 @@ const Login = () => {
                         <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
                         <FormikComponent control='input' id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <div className='w-full relative'>
-                          <button className='submit__btn' type="submit">Login</button>
+                          <button className='submit__btn' type="submit">{isLoading ? "LOGGING IN" : "Login"}</button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>

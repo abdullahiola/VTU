@@ -112,7 +112,7 @@ const ResetConfirmation = () => {
                         <FormikComponent control='input' id='oldPassword' name='oldPassword' type='password' label='Password: ' placeholder='********' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <FormikComponent control='input' id='newPassword' name='newPassword' type='password' label='New password: ' placeholder='********' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <div className='w-full relative'>
-                          <button className='submit__btn' type="submit">Confirm</button>
+                          <button className='submit__btn' type="submit">{(queryLoading ? "Verifying" : "Confirm") || (mutateLoading ? "Reseting" : "Confirm")}</button>
                           { queryLoading || mutateLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>

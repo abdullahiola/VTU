@@ -90,7 +90,7 @@ const ResetPassword = () => {
                       <Form>
                         <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
                         <div className='w-full relative'>
-                          <button className='submit__btn' type="submit">Confirm</button>
+                          <button className='submit__btn' type="submit">{isLoading ? "Verifying" : "Confirm"}</button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>
