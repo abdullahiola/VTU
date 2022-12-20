@@ -84,13 +84,10 @@ const Signup = () => {
   const closeNetworkErrorModal = () => {
     setErrorState(false)
   }
-
+  
   
   return (
     <div className="min-h-screen">
-      {
-        isLoading && <Loading />
-      }
       {
         errorState && <Modal closeModal={closeErrorModal}>Email address already in use.</Modal>
       }
@@ -115,7 +112,10 @@ const Signup = () => {
                         <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
                         <FormikComponent control='input' id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility}/>
                         <FormikComponent control='input' id='refCode' name='refCode' type='text' label='Referral code' required={false} />
-                        <button className='submit__btn' type="submit">Submit</button>
+                        <div className='w-full relative'>
+                          <button className='submit__btn' type="submit">{isLoading ? "Signing In" : "Sign in"}</button>
+                          { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
+                        </div>
                       </Form>
                       <span className=' text-gray-300 text-sm'>Already on voom?  <Link to='/login' className=' text-purple hover:underline'>Log In</Link></span>
                     </Fragment>

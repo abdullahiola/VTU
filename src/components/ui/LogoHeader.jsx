@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../assets/media/Frame 7264.png'
+import Logo from '../../assets/media/Frame 7264.svg'
 const LogoHeader = () => {
 
   return (
