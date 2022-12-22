@@ -1,12 +1,27 @@
 import { useMutation, useQuery } from 'react-query'
 import {queryClient} from '../App'
+import { UserType } from '../components/form/Types'
 import { request } from '../utils/axios.utils'
 
+export type DetailsTypes = {
+  // [key: string]: object[]
+  data: UserType[]
+}
+
+export type SingleType = {
+  data: UserType
+}
+
+
+export type ErrorTypes = {
+  [key: string]: object | string
+  message: string
+}
 
 const fetchUser = async () => {
   return await request({url: '/users', method: 'get'})
 }
-export const useUserData = (onSuccess, onError) => {
+export const useUserData = (onSuccess?: (values: DetailsTypes) => void, onError?: (errors: ErrorTypes) => void) => {
   return useQuery(
     ['login'],
     fetchUser,
@@ -19,10 +34,10 @@ export const useUserData = (onSuccess, onError) => {
 }
 
 
-const fetchSingleUser = async (id) => {
+const fetchSingleUser = async (id: string) => {
   return await request({url: `/users/${id}`, method: 'get'})
 }
-export const useSingleUser = (onSuccess, onError, id) => {
+export const useSingleUser = (id: string, onSuccess?: (values: SingleType) => void, onError?: (errors: ErrorTypes) => void) => {
   return useQuery(
     ['single-user'],
     () => fetchSingleUser(id),
@@ -35,7 +50,7 @@ export const useSingleUser = (onSuccess, onError, id) => {
 }
 
 
-const createUser = async (details) => {
+const createUser = async (details: UserType) => {
   return await request({url: '/users', method: 'post', data: details})
 }
 export const useCreateUser = () => {
@@ -47,7 +62,7 @@ export const useCreateUser = () => {
 }
 
 
-const editUser = async (details) => {
+const editUser = async (details: UserType) => {
   return await request({url: `/users/${details.id}`, method: 'patch', data: details})
 }
 export const useEditUser = () => {

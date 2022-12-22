@@ -2,24 +2,32 @@ import React, { Fragment, useEffect, useRef, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import FormikComponent from '../components/form/FormikComponent'
 import uuid from 'react-uuid'
 import { Link } from 'react-router-dom'
 import LogoHeader from '../components/ui/LogoHeader'
 import { useCreateUser, useUserData } from '../hooks/useUserData'
 import Modal from '../components/utilities/Modal'
 import Loading from '../components/utilities/Loading'
+import { UserType, VisibilityType } from '../components/form/Types'
+import Input from '../components/form/Input'
+import Button from '../components/form/Button'
+
+type ValueType = {
+  email: string
+  password: string
+  refCode: string
+}
 
 const Signup = () => {
 
   const {mutate: createUser} = useCreateUser()
   const {data, isLoading, isError, error, refetch} = useUserData()
   const [errorState, setErrorState] = useState(false)
-  const [visibility, setVisibility] = useState({password: false})
+  const [visibility, setVisibility] = useState<VisibilityType>({password: false})
   const [networkError, setNetworkError] = useState(false)
-  const resetRef = useRef(null)
-  const userIdRef = useRef(null)
-  const userPasswordRef = useRef(null)
+  const resetRef = useRef<(() => void) | null>(null)
+  const userIdRef = useRef<string | null>(null)
+  const userPasswordRef = useRef<string | null>(null)
   
   useEffect(() => {
     if(data?.data) {
@@ -31,7 +39,7 @@ const Signup = () => {
       } else if (!existUser.length && (userIdRef.current && userPasswordRef.current)) {
         const id = generateId()
         postUser({id, email: userIdRef.current, password: userPasswordRef.current})
-        reset(resetRef.current)
+        reset(resetRef.current!)
       }
     }
   
@@ -43,14 +51,14 @@ const Signup = () => {
     }
   }, [isError])
 
-  const reset = (fn) => { 
+  const reset = (fn: () => void) => { 
     fn()
     userIdRef.current = null
     userPasswordRef.current = null
-    setVisibility(false)
+    setVisibility({password: false})
    }
 
-   const postUser = (userDetail) => {
+   const postUser = (userDetail: UserType) => {
      createUser(userDetail)
    }
 
@@ -58,7 +66,7 @@ const Signup = () => {
     return uuid()
    }
 
-  const onSubmit = (values, {resetForm}) => {
+  const onSubmit = (values: ValueType, {resetForm}: {resetForm: () => void}) => {
     userIdRef.current = values.email
     userPasswordRef.current = values.password
     resetRef.current = resetForm
@@ -92,7 +100,7 @@ const Signup = () => {
         errorState && <Modal closeModal={closeErrorModal}>Email address already in use.</Modal>
       }
       {
-        networkError && <Modal closeModal={closeNetworkErrorModal}>{error.message} <br />Please try again</Modal>
+        networkError && <Modal closeModal={closeNetworkErrorModal}>{error && error.message} <br />Please try again</Modal>
       }
       <LogoHeader />
       <div>
@@ -109,11 +117,11 @@ const Signup = () => {
                   return (
                     <Fragment>
                       <Form>
-                        <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
-                        <FormikComponent control='input' id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility}/>
-                        <FormikComponent control='input' id='refCode' name='refCode' type='text' label='Referral code' required={false} />
+                        <Input id='email' name='email' type='email' label='Email address' placeholder='email address' required />
+                        <Input id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility} />
+                        <Input id='refCode' name='refCode' type='text' label='Referral code' required={false} />
                         <div className='w-full relative'>
-                          <button className='submit__btn' type="submit">{isLoading ? "Signing In" : "Sign in"}</button>
+                          <Button>{isLoading ? "Signing In" : "Sign in"}</Button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>
