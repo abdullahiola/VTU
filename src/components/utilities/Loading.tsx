@@ -2,11 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Overlay from './Overlay'
 
-const Loading = ({full, mini, ...props}) => {
 
-  const elem = document.querySelector(".app")
+type FullType = {
+  full: boolean
+  mini?: never
+}
 
-  const genSpinnerButtons = (w, h) => { 
+type MiniType = {
+  mini: boolean
+  full?: never
+}
+
+type LoadingPropsType = FullType | MiniType
+
+const Loading = ({full, mini, ...props}: LoadingPropsType) => {
+
+  const elem = document.querySelector(".app") as HTMLDivElement
+
+  const genSpinnerButtons = () => { 
     return (
       <>
         <li className={` ${mini ? "w-2" : "w-8"} ${mini ? "h-2" : "h-8"} ${full && "animate-[loading_ease_1s_infinite_0s] top-[13%] right-[12%]"} rounded-full bg-white absolute top-[13%] right-[12%]`}></li>
@@ -25,18 +38,24 @@ const Loading = ({full, mini, ...props}) => {
      return ReactDOM.createPortal(
        <Overlay opacity={0.7}>
          <ul className=" bg-transparent w-[180px] h-[180px] relative rounded-[50%]">
-          {genSpinnerButtons(32,32)}
+          {genSpinnerButtons()}
          </ul>
        </Overlay>, 
        elem
      )
    }
 
-   if (mini) {
+   else if (mini) {
     return (
       <ul className={` animate-spin w-full h-full relative rounded-[50%]`}>
-        {genSpinnerButtons(8,8)}
+        {genSpinnerButtons()}
       </ul>
+    )
+   }
+
+   else {
+    return (
+      <></>
     )
    }
 

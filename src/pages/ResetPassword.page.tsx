@@ -2,13 +2,18 @@ import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import FormikComponent from '../components/form/FormikComponent'
 import { Link, useNavigate } from 'react-router-dom'
 import LogoHeader from '../components/ui/LogoHeader'
 import { useUserData } from '../hooks/useUserData'
 import { AppContext } from '../context/AppContext'
 import Loading from '../components/utilities/Loading'
 import Modal from '../components/utilities/Modal'
+import Input from '../components/form/Input'
+import Button from '../components/form/Button'
+
+type ValueType = {
+  email: string
+}
 
 const ResetPassword = () => {
 
@@ -16,7 +21,7 @@ const ResetPassword = () => {
   const {setValidateUserAccess, setUserId} = useContext(AppContext)
   const [errorState, setErrorState] = useState(false)
   const [networkError, setNetworkError] = useState(false)
-  const emailRef = useRef(null)
+  const emailRef = useRef<string | null>(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -33,8 +38,8 @@ const ResetPassword = () => {
       })
       if (userData.length) {
         setErrorState(false)
-        setValidateUserAccess(true)
-        setUserId(userData[0].id)
+        setValidateUserAccess!(true)
+        setUserId!(userData[0].id)
         navigate("/confirm-reset")
       } else if (!userData.length && emailRef.current) {
         setErrorState(true)
@@ -43,7 +48,7 @@ const ResetPassword = () => {
   
   }, [data])
   
-  const onSubmit = (values) => {
+  const onSubmit = (values: ValueType) => {
     emailRef.current = values.email
     refetch()
   }
@@ -71,7 +76,7 @@ const ResetPassword = () => {
         errorState && <Modal closeModal={closeErrorModal}>Email not found</Modal>
       }
       {
-        networkError && <Modal closeModal={closeNetworkErrorModal}>{error.message} <br />Please try again!</Modal>
+        networkError && <Modal closeModal={closeNetworkErrorModal}>{error && error.message} <br />Please try again!</Modal>
       }
       <LogoHeader />
       <div>
@@ -88,9 +93,9 @@ const ResetPassword = () => {
                   return (
                     <Fragment>
                       <Form>
-                        <FormikComponent control='input' id='email' name='email' type='email' label='Email address' placeholder='email address' required={true} />
+                        <Input id='email' name='email' type='email' label='Email address' placeholder='email address' required />
                         <div className='w-full relative'>
-                          <button className='submit__btn' type="submit">{isLoading ? "Verifying" : "Confirm"}</button>
+                          <Button>{isLoading ? "Verifying" : "Confirm"}</Button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>
