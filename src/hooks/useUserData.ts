@@ -3,8 +3,9 @@ import {queryClient} from '../App'
 import { UserType } from '../components/form/Types'
 import { request } from '../utils/axios.utils'
 
+const urlPath = '/users'
+
 export type DetailsTypes = {
-  // [key: string]: object[]
   data: UserType[]
 }
 
@@ -19,15 +20,19 @@ export type ErrorTypes = {
 }
 
 const fetchUser = async () => {
-  return await request({url: '/users', method: 'get'})
+  const data: {[key: string]: any} = await request({url: urlPath, method: 'get'})
+  if (data.toString() === 'AxiosError: Network Error') {
+    throw new Error(data.message)
+  }
+  return data
 }
-export const useUserData = (onSuccess?: (values: DetailsTypes) => void, onError?: (errors: ErrorTypes) => void) => {
+export const useUserData = (id: string, successFn?: (values: DetailsTypes) => void, errorFn?: (errors: ErrorTypes) => void) => {
   return useQuery(
-    ['login'],
+    ['user', id],
     fetchUser,
     {
-      onSuccess,
-      onError,
+      onSuccess: successFn,
+      onError: errorFn,
       enabled: false
     }
   )
@@ -35,15 +40,19 @@ export const useUserData = (onSuccess?: (values: DetailsTypes) => void, onError?
 
 
 const fetchSingleUser = async (id: string) => {
-  return await request({url: `/users/${id}`, method: 'get'})
+  const data: {[key: string]: any} = await request({url: `${urlPath}/${id}`, method: 'get'})
+  if (data.toString() === 'AxiosError: Network Error') {
+    throw new Error(data.message)
+  }
+  return data
 }
-export const useSingleUser = (id: string, onSuccess?: (values: SingleType) => void, onError?: (errors: ErrorTypes) => void) => {
+export const useSingleUser = (id: string, successFn?: (values: SingleType) => void, errorFn?: (errors: ErrorTypes) => void) => {
   return useQuery(
     ['single-user'],
     () => fetchSingleUser(id),
     {
-      onSuccess,
-      onError,
+      onSuccess: successFn,
+      onError: errorFn,
       enabled: false
     }
   )
@@ -51,24 +60,34 @@ export const useSingleUser = (id: string, onSuccess?: (values: SingleType) => vo
 
 
 const createUser = async (details: UserType) => {
-  return await request({url: '/users', method: 'post', data: details})
+  return await request({url: urlPath, method: 'post', data: details})
 }
 export const useCreateUser = () => {
-  return useMutation(createUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("login")
-    }
-  })
+  return useMutation(createUser, 
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("login")
+      },
+      onError: (error: ErrorTypes) => {
+        throw new Error(error.message)
+      }
+    })
 }
 
 
 const editUser = async (details: UserType) => {
-  return await request({url: `/users/${details.id}`, method: 'patch', data: details})
+  return await request({url: `${urlPath}/${details.id}`, method: 'patch', data: details})
 }
 export const useEditUser = () => {
-  return useMutation(editUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("login")
-    }
-  })
+  return useMutation(editUser, 
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["user", "login"])
+        queryClient.invalidateQueries(["user", "signup"])
+        queryClient.invalidateQueries(['single-user'])
+      },
+      onError: (error: ErrorTypes) => {
+        throw new Error(error.message)
+      }
+    })
 }
