@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useRef, useState } from 'react'
+import React, { Fragment, useContext, useRef, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -10,6 +10,7 @@ import Loading from '../components/utilities/Loading'
 import Modal from '../components/utilities/Modal'
 import Input from '../components/form/Input'
 import Button from '../components/form/Button'
+import { UserType } from '../components/form/Types'
 
 type ValueType = {
   email: string
@@ -17,37 +18,33 @@ type ValueType = {
 
 const ResetPassword = () => {
 
-  const {data, isError, error, isLoading, refetch} = useUserData()
+  const queryId = 'reset'
+
+  const onSuccess = (data: {[key: string]: any}) => {
+    const userData =  data.data.filter((user: UserType) => {
+      return user.email === emailRef.current
+    })
+    if (userData.length) {
+      setErrorState(false)
+      setValidateUserAccess!(true)
+      setUserId!(userData[0].id)
+      navigate("/confirm-reset")
+    } else if (!userData.length && emailRef.current) {
+      setErrorState(true)
+    }
+  }
+
+  const onError = () => {
+    setNetworkError(true)
+  }
+
+  const {error, isLoading, refetch} = useUserData(queryId, onSuccess, onError)
   const {setValidateUserAccess, setUserId} = useContext(AppContext)
   const [errorState, setErrorState] = useState(false)
   const [networkError, setNetworkError] = useState(false)
   const emailRef = useRef<string | null>(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isError) {
-      setErrorState(true)
-    }
-    
-  }, [isError])
-
-  useEffect(() => {
-    if (data?.data) {
-      const userData =  data.data.filter(user => {
-        return user.email === emailRef.current
-      })
-      if (userData.length) {
-        setErrorState(false)
-        setValidateUserAccess!(true)
-        setUserId!(userData[0].id)
-        navigate("/confirm-reset")
-      } else if (!userData.length && emailRef.current) {
-        setErrorState(true)
-      }
-    }
-  
-  }, [data])
-  
   const onSubmit = (values: ValueType) => {
     emailRef.current = values.email
     refetch()
@@ -68,7 +65,6 @@ const ResetPassword = () => {
    const closeNetworkErrorModal = () => {
     setNetworkError(false)
   }
-
 
   return (
     <div className='min-h-screen'>
@@ -95,7 +91,7 @@ const ResetPassword = () => {
                       <Form>
                         <Input id='email' name='email' type='email' label='Email address' placeholder='email address' required />
                         <div className='w-full relative'>
-                          <Button>{isLoading ? "Verifying" : "Confirm"}</Button>
+                          <Button disabled={(formik.isSubmitting && isLoading)}>{isLoading ? "Verifying" : "Confirm"}</Button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>

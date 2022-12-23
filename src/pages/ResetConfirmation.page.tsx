@@ -20,8 +20,22 @@ type FormValueType = {
 
 const ResetConfirmation = () => {
 
+  const onSuccess = (data: {[key: string]: any}) => {
+    const userPassword = data.data.password
+      if (userPassword === oldPasswordRef.current) {
+        editUser({...data.data, password: newPasswordRef.current!})
+        reset(resetRef.current!)
+      } else if ((userPassword && oldPasswordRef.current && newPasswordRef.current) && (userPassword !== oldPasswordRef.current)) {
+        setErrorState(true)
+      }
+  }
+
+  const onError = () => {
+    setNetworkError(true)
+  }
+
   const {validateUserAccess, userId} = useContext(AppContext)
-  const {data, isLoading: queryLoading, isError, error, refetch}: UseQueryResult<SingleType, ErrorTypes> = useSingleUser(userId!)
+  const {isLoading: queryLoading, isError, error, refetch}: UseQueryResult<SingleType, ErrorTypes> = useSingleUser(userId!, onSuccess, onError)
   const {mutate: editInfo,  isLoading: mutateLoading, } = useEditUser()
   const [visibility, setVisibility] = useState<VisibilityType>({oldPassword: false, newPassword: false})
   const [errorState, setErrorState] = useState(false)
@@ -40,26 +54,6 @@ const ResetConfirmation = () => {
    const editUser = (userDetails: UserType) => {
     editInfo(userDetails)
    }
-
-   useEffect(() => {
-    if (isError) {
-      setNetworkError(true)
-    }
-    
-  }, [isError])
-
-   useEffect(() => {
-     if (data?.data) {
-       const userPassword = data.data.password
-       if (userPassword === oldPasswordRef.current) {
-         editUser({...data.data, password: newPasswordRef.current!})
-        reset(resetRef.current!)
-      } else if ((userPassword && oldPasswordRef.current && newPasswordRef.current) && (userPassword !== oldPasswordRef.current)) {
-        setErrorState(true)
-      }
-     }
-   
-   }, [data])
    
   const onSubmit = (values: FormValueType, {resetForm}: {resetForm: () => void}) => {
     oldPasswordRef.current = values.oldPassword
@@ -120,7 +114,7 @@ const ResetConfirmation = () => {
                         <Input id='oldPassword' name='oldPassword' type='password' label='Password: ' placeholder='********' required visibility={visibility} setVisibility={setVisibility} />
                         <Input id='newPassword' name='newPassword' type='password' label='New password: ' placeholder='********' required visibility={visibility} setVisibility={setVisibility} />
                         <div className='w-full relative'>
-                          <Button>{(queryLoading ? "Verifying" : "Confirm") || (mutateLoading ? "Reseting" : "Confirm")}</Button>
+                          <Button disabled={(formik.isSubmitting && (queryLoading || mutateLoading))}>{(queryLoading ? "Verifying" : "Confirm") || (mutateLoading ? "Reseting" : "Confirm")}</Button>
                           { (queryLoading || mutateLoading) && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>
