@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query"
+import { ReactQueryDevtools } from 'react-query/devtools'
 import { Routes, Route } from "react-router-dom"
 import AuthProvider from "./auth/Auth"
 import AppContextProvider from "./context/AppContext"
@@ -28,6 +29,7 @@ function App() {
           </div>
         </AppContextProvider>
       </AuthProvider>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
   )
 }
