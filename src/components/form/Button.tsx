@@ -2,11 +2,12 @@ import React from 'react'
 
 type ButtonPropsType = {
   children: React.ReactNode
-}
+  disabled?: boolean
+} & React.ComponentProps<'button'>
 
-const Button = ({children}: ButtonPropsType) => {
+const Button = ({children, disabled}: ButtonPropsType) => {
   return (
-    <button className='submit__btn' type="submit">{children}</button>
+    <button disabled={disabled} className='submit__btn' type="submit">{children}</button>
   )
 }
 
