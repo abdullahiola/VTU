@@ -5,11 +5,11 @@ import AuthProvider from "./auth/Auth"
 import Require from "./auth/Require"
 import AppContextProvider from "./context/AppContext"
 import Error from "./pages/Error.page"
-import Home from "./pages/Home.page"
-import Login from "./pages/Login.page"
-import ResetConfirmation from "./pages/ResetConfirmation.page"
-import ResetPassword from "./pages/ResetPassword.page"
-import Signup from "./pages/Signup.page"
+import Home from "./pages/home/Home.page"
+import Login from "./pages/authentication/Login.page"
+import ResetConfirmation from "./pages/authentication/ResetConfirmation.page"
+import ResetPassword from "./pages/authentication/ResetPassword.page"
+import Signup from "./pages/authentication/Signup.page"
 
 export const queryClient = new QueryClient()
 function App() {
