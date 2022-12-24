@@ -12,6 +12,7 @@ import { UseQueryResult } from 'react-query'
 import { UserType, VisibilityType } from '../components/form/Types'
 import Input from '../components/form/Input'
 import Button from '../components/form/Button'
+import { AuthContext } from '../auth/Auth'
 
 type FormValueType = {
   oldPassword: string 
@@ -25,6 +26,7 @@ const ResetConfirmation = () => {
       if (userPassword === oldPasswordRef.current) {
         editUser({...data.data, password: newPasswordRef.current!})
         reset(resetRef.current!)
+        navigate("/login")
       } else if ((userPassword && oldPasswordRef.current && newPasswordRef.current) && (userPassword !== oldPasswordRef.current)) {
         setErrorState(true)
       }
@@ -35,7 +37,8 @@ const ResetConfirmation = () => {
   }
 
   const {validateUserAccess, userId} = useContext(AppContext)
-  const {isLoading: queryLoading, isError, error, refetch}: UseQueryResult<SingleType, ErrorTypes> = useSingleUser(userId!, onSuccess, onError)
+  const {isLoggedIn} = useContext(AuthContext)
+  const {isLoading: queryLoading, error, refetch}: UseQueryResult<SingleType, ErrorTypes> = useSingleUser(userId!, onSuccess, onError)
   const {mutate: editInfo,  isLoading: mutateLoading, } = useEditUser()
   const [visibility, setVisibility] = useState<VisibilityType>({oldPassword: false, newPassword: false})
   const [errorState, setErrorState] = useState(false)
@@ -81,8 +84,8 @@ const ResetConfirmation = () => {
   }
 
   useEffect(() => {
-    if (!validateUserAccess) {
-      navigate("/login")
+    if (isLoggedIn && !validateUserAccess) {
+      navigate("/reset")
     }
   
   }, [validateUserAccess])
