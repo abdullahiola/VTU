@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'react-query'
 import {queryClient} from '../App'
-import { UserType } from '../components/form/Types'
+import { UserType } from '../global.types'
 import { request } from '../utils/axios.utils'
 
 const urlPath = '/users'
@@ -12,7 +12,6 @@ export type DetailsTypes = {
 export type SingleType = {
   data: UserType
 }
-
 
 export type ErrorTypes = {
   [key: string]: object | string
@@ -26,6 +25,7 @@ const fetchUser = async () => {
   }
   return data
 }
+
 export const useUserData = (id: string, successFn?: (values: DetailsTypes) => void, errorFn?: (errors: ErrorTypes) => void) => {
   return useQuery(
     ['user', id],
@@ -46,6 +46,7 @@ const fetchSingleUser = async (id: string) => {
   }
   return data
 }
+
 export const useSingleUser = (id: string, successFn?: (values: SingleType) => void, errorFn?: (errors: ErrorTypes) => void) => {
   return useQuery(
     ['single-user'],
@@ -62,6 +63,7 @@ export const useSingleUser = (id: string, successFn?: (values: SingleType) => vo
 const createUser = async (details: UserType) => {
   return await request({url: urlPath, method: 'post', data: details})
 }
+
 export const useCreateUser = () => {
   return useMutation(createUser, 
     {
@@ -78,6 +80,7 @@ export const useCreateUser = () => {
 const editUser = async (details: UserType) => {
   return await request({url: `${urlPath}/${details.id}`, method: 'patch', data: details})
 }
+
 export const useEditUser = () => {
   return useMutation(editUser, 
     {
