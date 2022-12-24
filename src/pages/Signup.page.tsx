@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { Fragment, useRef, useContext, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -11,6 +11,7 @@ import Loading from '../components/utilities/Loading'
 import { UserType, VisibilityType } from '../components/form/Types'
 import Input from '../components/form/Input'
 import Button from '../components/form/Button'
+import { AuthContext } from '../auth/Auth'
 
 type ValueType = {
   email: string
@@ -20,8 +21,29 @@ type ValueType = {
 
 const Signup = () => {
 
+  const queryId = 'signup'
+
+  const onSuccess = (data: {[key: string]: any}) => {
+    const existUser = data.data.filter((user: UserType) => {
+      return user.email === userIdRef.current
+    })
+    if (existUser.length) {
+      setErrorState(true)
+    } else if (!existUser.length && (userIdRef.current && userPasswordRef.current)) {
+      const id = generateId()
+      postUser({id, email: userIdRef.current, password: userPasswordRef.current})
+      reset(resetRef.current!)
+      login()
+    }
+  }
+
+  const onError = () => {
+    setNetworkError(true)
+  }
+
   const {mutate: createUser} = useCreateUser()
-  const {data, isLoading, isError, error, refetch} = useUserData()
+  const {isLoading, error, refetch} = useUserData(queryId, onSuccess, onError)
+  const {login} = useContext(AuthContext)
   const [errorState, setErrorState] = useState(false)
   const [visibility, setVisibility] = useState<VisibilityType>({password: false})
   const [networkError, setNetworkError] = useState(false)
@@ -29,28 +51,6 @@ const Signup = () => {
   const userIdRef = useRef<string | null>(null)
   const userPasswordRef = useRef<string | null>(null)
   
-  useEffect(() => {
-    if(data?.data) {
-      const existUser = data.data.filter(user => {
-        return user.email === userIdRef.current
-      })
-      if (existUser.length) {
-        setErrorState(true)
-      } else if (!existUser.length && (userIdRef.current && userPasswordRef.current)) {
-        const id = generateId()
-        postUser({id, email: userIdRef.current, password: userPasswordRef.current})
-        reset(resetRef.current!)
-      }
-    }
-  
-  }, [data])
-
-  useEffect(() => {
-    if (isError) {
-      setNetworkError(true)
-    }
-  }, [isError])
-
   const reset = (fn: () => void) => { 
     fn()
     userIdRef.current = null
@@ -90,10 +90,9 @@ const Signup = () => {
   }
 
   const closeNetworkErrorModal = () => {
-    setErrorState(false)
+    setNetworkError(false)
   }
-  
-  
+    
   return (
     <div className="min-h-screen">
       {
@@ -121,7 +120,7 @@ const Signup = () => {
                         <Input id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <Input id='refCode' name='refCode' type='text' label='Referral code' required={false} />
                         <div className='w-full relative'>
-                          <Button>{isLoading ? "Signing In" : "Sign in"}</Button>
+                          <Button disabled={(formik.isSubmitting && isLoading)}>{isLoading ? "Signing In" : "Sign in"}</Button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>

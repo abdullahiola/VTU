@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { Fragment, useRef, useContext, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik, FormikState } from 'formik'
 import * as Yup from 'yup'
@@ -8,47 +8,46 @@ import { DetailsTypes, ErrorTypes, useUserData } from '../hooks/useUserData'
 import Loading from '../components/utilities/Loading'
 import Modal from '../components/utilities/Modal'
 import Input from '../components/form/Input'
-import { VisibilityType } from '../components/form/Types'
+import { UserType, VisibilityType } from '../components/form/Types'
 import { UseQueryResult } from 'react-query'
 import Button from '../components/form/Button'
+import { AuthContext } from '../auth/Auth'
 
 type ValueType = {
   email: string
   password: string
 }
 
-
 const Login = () => {
 
-  const {data, isLoading, isError, error, refetch}: UseQueryResult<DetailsTypes, ErrorTypes> = useUserData()
+  const queryId: string = 'login'
+
+  const onSuccess = (data: {[key: string]: any}) => {
+    const userDetails = data.data.filter((user: UserType) => {
+      return (user.email === userEmailRef.current) && (user.password === userPasswordRef.current)
+    })
+    if (userDetails.length) {
+      if (resetRef.current) {
+        reset(resetRef.current)
+        login()
+      }
+    } else if (!userDetails.length && (userEmailRef.current && userPasswordRef.current)) {
+      setErrorState(true)
+    }
+  }
+
+  const onError = () => {
+    setNetworkError(true)
+  }
+
+  const {isLoading, error, refetch}: UseQueryResult<DetailsTypes, ErrorTypes> = useUserData(queryId, onSuccess, onError)
+  const {login} = useContext(AuthContext)
   const resetRef = useRef<(() => void) | null>(null)
   const userEmailRef = useRef<string | null>(null)
   const userPasswordRef = useRef<string | null>(null)
   const [visibility, setVisibility] = useState<VisibilityType>({password: false})
   const [errorState, setErrorState] = useState(false)
   const [networkError, setNetworkError] = useState(false)
-
-  useEffect(() => {
-    if (isError) {
-      setNetworkError(true)
-    }
-  }, [isError])
-
-  useEffect(() => {
-    if (data?.data) {
-      const userDetails = data.data.filter(user => {
-        return (user.email === userEmailRef.current) && (user.password === userPasswordRef.current)
-      })
-      if (userDetails.length) {
-        if (resetRef.current) {
-          reset(resetRef.current)
-        }
-      } else if (!userDetails.length && (userEmailRef.current && userPasswordRef.current)) {
-        setErrorState(true)
-      }
-    }
-  
-  }, [data])
   
   const reset = (fn: () => void) => { 
     fn()
@@ -81,7 +80,6 @@ const Login = () => {
     setNetworkError(false)
   }
 
-  
   return (
     <div className='min-h-screen'>
       {
@@ -100,17 +98,23 @@ const Login = () => {
               validationSchema={validationSchema}
               onSubmit={onSubmit}
             >
-              <Fragment>
-                <Form>
-                  <Input id='email' name='email' type='email' label='Email address' placeholder='email address' required />
-                  <Input id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' visibility={visibility} setVisibility={setVisibility}  required />
-                  <div className='w-full relative'>
-                    <Button>{isLoading ? "LOGGING IN" : "Login"}</Button>
-                    { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
-                  </div>
-                </Form>
-                <span className=' text-gray-300 text-sm'>Want to Join voom? <Link to='/signup' className=' text-purple hover:underline'>Sign Up</Link></span>
-              </Fragment>
+              {
+                formik => {
+                  return (
+                    <Fragment>
+                      <Form>
+                        <Input id='email' name='email' type='email' label='Email address' placeholder='email address' required />
+                        <Input id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' visibility={visibility} setVisibility={setVisibility}  required />
+                        <div className='w-full relative'>
+                          <Button disabled={(formik.isSubmitting && isLoading)}>{isLoading ? "LOGGING IN" : "Login"}</Button>
+                          { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
+                        </div>
+                      </Form>
+                      <span className=' text-gray-300 text-sm'>Want to Join voom? <Link to='/signup' className=' text-purple hover:underline'>Sign Up</Link></span>
+                    </Fragment>
+                  )
+                }
+              }
             </Formik>
           </div>
           <DownloadMobile />

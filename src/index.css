@@ -29,6 +29,14 @@
   *::-webkit-scrollbar {
     display: none;
   }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #D7F4E4 inset !important;
+    -webkit-text-fill-color: #1C1B1F;
+  }
 }
 
 
@@ -37,7 +45,7 @@
     @apply block w-full text-base outline-none text-dark-200 px-4 py-3 border border-gray-200 rounded-lg bg-[calc(100%-18px)] bg-no-repeat placeholder:text-gray-100 focus:border-[#37C779];
   }
   .submit__btn {
-    @apply  block w-full py-3 px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase hover:bg-green-700 focus:bg-green-700;
+    @apply  block w-full py-3 px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase hover:bg-green-700 focus:bg-green-700 disabled:bg-green-400 disabled:cursor-no-drop;
   }
 }
 
