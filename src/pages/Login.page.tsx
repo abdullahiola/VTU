@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useRef, useContext, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik, FormikState } from 'formik'
 import * as Yup from 'yup'
@@ -11,6 +11,7 @@ import Input from '../components/form/Input'
 import { UserType, VisibilityType } from '../components/form/Types'
 import { UseQueryResult } from 'react-query'
 import Button from '../components/form/Button'
+import { AuthContext } from '../auth/Auth'
 
 type ValueType = {
   email: string
@@ -28,6 +29,7 @@ const Login = () => {
     if (userDetails.length) {
       if (resetRef.current) {
         reset(resetRef.current)
+        login()
       }
     } else if (!userDetails.length && (userEmailRef.current && userPasswordRef.current)) {
       setErrorState(true)
@@ -39,6 +41,7 @@ const Login = () => {
   }
 
   const {isLoading, error, refetch}: UseQueryResult<DetailsTypes, ErrorTypes> = useUserData(queryId, onSuccess, onError)
+  const {login} = useContext(AuthContext)
   const resetRef = useRef<(() => void) | null>(null)
   const userEmailRef = useRef<string | null>(null)
   const userPasswordRef = useRef<string | null>(null)

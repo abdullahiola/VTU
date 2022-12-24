@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useRef, useContext, useState } from 'react'
 import DownloadMobile from '../components/ui/DownloadMobile'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
@@ -11,6 +11,7 @@ import Loading from '../components/utilities/Loading'
 import { UserType, VisibilityType } from '../components/form/Types'
 import Input from '../components/form/Input'
 import Button from '../components/form/Button'
+import { AuthContext } from '../auth/Auth'
 
 type ValueType = {
   email: string
@@ -32,6 +33,7 @@ const Signup = () => {
       const id = generateId()
       postUser({id, email: userIdRef.current, password: userPasswordRef.current})
       reset(resetRef.current!)
+      login()
     }
   }
 
@@ -41,6 +43,7 @@ const Signup = () => {
 
   const {mutate: createUser} = useCreateUser()
   const {isLoading, error, refetch} = useUserData(queryId, onSuccess, onError)
+  const {login} = useContext(AuthContext)
   const [errorState, setErrorState] = useState(false)
   const [visibility, setVisibility] = useState<VisibilityType>({password: false})
   const [networkError, setNetworkError] = useState(false)
