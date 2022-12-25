@@ -121,7 +121,7 @@ const Signup = () => {
                         <Input id='password' name='password' type='password' label='Password' placeholder='********' fPassword='Forgot Password?' required={true} visibility={visibility} setVisibility={setVisibility} />
                         <Input id='refCode' name='refCode' type='text' label='Referral code' required={false} />
                         <div className='w-full relative'>
-                          <Button disabled={(formik.isSubmitting && isLoading)}>{isLoading ? "Signing In" : "Sign in"}</Button>
+                          <Button disabled={(formik.isSubmitting && isLoading)}>{isLoading ? "Signing Up" : "Sign Up"}</Button>
                           { isLoading && <div className=' absolute left-3 h-4/5 aspect-square top-1/2 -translate-y-1/2'><Loading mini /></div>}
                         </div>
                       </Form>
