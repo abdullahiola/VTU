@@ -10,7 +10,7 @@ import Loading from '../../components/utilities/Loading'
 import Modal from '../../components/utilities/Modal'
 import Input from '../../components/form/Input'
 import Button from '../../components/form/Button'
-import { UserType } from '../../global.types'
+import { UserType } from '../../types/global.types'
 
 type ValueType = {
   email: string

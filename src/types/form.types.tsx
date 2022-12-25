@@ -1,4 +1,4 @@
-import { ObjectShapeType } from "../../global.types"
+import { ObjectShapeType } from "./global.types"
 
 export type FormikHelperType = FormType & FieldType
 
