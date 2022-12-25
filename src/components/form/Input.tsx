@@ -5,8 +5,8 @@ import ErrorMsg from './ErrorMsg';
 import {MdOutlineCancel} from 'react-icons/md'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import Alert from '../../assets/media/alert.svg'
-import { FormikHelperType, FormKeyType, FieldKeyType, VisibilityType } from './form.types';
-import { FormWithPassword, FormWithOutPassword } from './form.types';
+import { FormikHelperType, FormKeyType, FieldKeyType, VisibilityType } from '../../types/form.types';
+import { FormWithPassword, FormWithOutPassword } from '../../types/form.types';
 
 type InputPropsType = FormWithPassword | FormWithOutPassword
 

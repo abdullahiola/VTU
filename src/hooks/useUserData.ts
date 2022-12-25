@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'react-query'
 import {queryClient} from '../App'
-import { UserType } from '../global.types'
+import { UserType } from '../types/global.types'
 import { request } from '../utils/axios.utils'
 
 const urlPath = '/users'
