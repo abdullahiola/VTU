@@ -37,6 +37,35 @@
     -webkit-box-shadow: 0 0 0 30px #D7F4E4 inset !important;
     -webkit-text-fill-color: #1C1B1F;
   }
+  li>a>svg.stroke {
+    stroke: #161616;
+  }
+  li>a>svg.fill {
+    fill: #161616;
+  }
+  li>a>span {
+    color: #161616;
+  }
+
+  li>a.active>svg.stroke {
+    stroke: #00C297;
+  }
+  li>a.active>svg.fill {
+    fill: #00C297;
+  }
+  li>a[aria-current='page']>span {
+    color: #00C297;
+  }
+
+  li:hover a>svg.stroke {
+    stroke: #00A27E;
+  }
+  li:hover a>svg.fill {
+    fill: #00A27E;
+  }
+  li:hover a>span {
+    color: #00A27E;
+  }
 }
 
 
