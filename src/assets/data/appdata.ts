@@ -15,7 +15,7 @@ export const menuNavData: MenuType = {
     },
     {
       title: 'Transactions',
-      to: '/transaction',
+      to: '/transactions',
       Icon: TransactionIcon,
     },
     {
@@ -37,12 +37,12 @@ export const menuNavData: MenuType = {
     },
     {
       title: 'Notifications',
-      to: '/notification',
+      to: '/notifications',
       Icon: NotificationIcon,
     },
     {
       title: 'Settings',
-      to: '/setting',
+      to: '/settings',
       Icon: SettingsIcon,
     }
   ],
