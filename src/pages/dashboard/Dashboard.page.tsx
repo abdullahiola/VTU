@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import Nav from '../../components/ui/Nav'
 import { AppContext } from '../../context/AppContext'
+import { DashboardType } from '../../types/dashboard.types'
 
-const Home = ({}) => {
+const Dashboard = ({Component, ...props}: DashboardType) => {
 
   const {menuState, setMenuState} = useContext(AppContext)
-
+  
   return (
     <div>
-      <h1 onClick={() => {setMenuState && setMenuState(!menuState)}} className='cursor-pointer'>Menu</h1>
-      <h5><Link className=' text-brown' to='/login'>Login</Link></h5>
-      <h5><Link className=' text-brown' to='/signup'>Signup</Link></h5>
+      <Nav />
+      <Component />
     </div>
   )
 }
 
-export default Home
+export default Dashboard
