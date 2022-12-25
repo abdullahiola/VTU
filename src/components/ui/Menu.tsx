@@ -17,7 +17,11 @@ const Menu = () => {
         ({title, Icon, to}: MenuObjType) => {
           return (
             <li key={title}>
-              <Link to={to} className='flex items-center justify-start gap-x-5'>
+              <Link 
+                onClick={() => {setMenuState && setMenuState(!menuState)}}
+                to={to}
+                className='flex items-center justify-start gap-x-5'
+              >
                 <Icon />
                 <span className='text-base capitalize'>{title}</span>
               </Link>
@@ -62,15 +66,15 @@ const Menu = () => {
           </div>
         </section>
         <div className='mt-[39px] mb-[18px] px-6'>
-          <button onClick={() => console.log('first')} className='flex items-center justify-start'>
+          <button className='flex items-center justify-start'>
             <LogoutIcon />
             <span className='ml-5'>Log Out</span>
           </button>
         </div>
         <div className='pb-4 px-6 flex items-center'>
-          <Link className='mr-4 text-gray-200 text-base hover:text-gray-300' to='/privacy'>Privacy</Link>
-          <Link className='mr-4 text-gray-200 text-base hover:text-gray-300' to='/terms'>Terms</Link>
-          <Link className='mr-4 text-gray-200 text-base hover:text-gray-300' to='/about'>About</Link>
+          <Link onClick={() => {setMenuState && setMenuState(!menuState)}} className='mr-4 text-gray-200 text-base hover:text-gray-300' to='/privacy'>Privacy</Link>
+          <Link onClick={() => {setMenuState && setMenuState(!menuState)}} className='mr-4 text-gray-200 text-base hover:text-gray-300' to='/terms'>Terms</Link>
+          <Link onClick={() => {setMenuState && setMenuState(!menuState)}} className='mr-4 text-gray-200 text-base hover:text-gray-300' to='/about'>About</Link>
         </div>
       </div>
     </div>
