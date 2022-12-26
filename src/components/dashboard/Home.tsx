@@ -1,5 +1,21 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {AiOutlinePlus} from 'react-icons/ai'
+import { NavLink as Link, useParams } from 'react-router-dom'
+import { HomeTabsPropsType } from '../../types/dashboard.types'
+
+const Home = () => {
+
+  const [path, setPath] = useState('buy-airtime')
+  const params = useParams()
+  const urlPath = params.dashboard || ''
+
+  return (
+    <div className='px-6 md:px-12'>
+      <FundDetail />
+      <Tabs path={path} urlPath={urlPath} setPath={setPath} />
+    </div>
+  )
+}
 
 export const FundDetail = () => {
 
@@ -22,10 +38,54 @@ export const FundDetail = () => {
   )
 }
 
-const Home = () => {
+export const Tabs = ({path, urlPath, setPath}: HomeTabsPropsType) => {
+
+  const linkRef1 = useRef({} as HTMLAnchorElement)
+  
+  useEffect(() => {
+    (urlPath || path) === 'buy-airtime' ? 
+      linkRef1.current.classList.add("active") : 
+      linkRef1.current.classList.remove("active")
+
+  }, [path])
+  
+
   return (
-    <div className='px-6 md:px-12'>
-      <FundDetail />
+    <div className='overflow-x-scroll'>
+      <nav className='flex gap-x-3 items-center justify-start py-2 px-1 h-full w-max'>
+        <Link
+          ref={linkRef1}
+          onClick={
+            () => {
+              setPath && setPath('buy-airtime') 
+            }
+          }
+          to='/home/buy-airtime'
+          className='home__tab px-1 py-2 border-2 border-[transparent] rounded-[1100px] text-base text-dark font-semibold'
+        >Buy Airtime
+        </Link>
+        <Link 
+          onClick={
+            (e) => {
+              setPath && setPath('buy-data')
+            }
+          }
+          to='/home/buy-data' 
+          className='home__tab px-1 py-2 border-2 border-[transparent] rounded-[1100px] text-base text-dark font-semibold'
+        >Buy Data
+        </Link>
+        <Link 
+          onClick={
+            () => {
+              setPath && setPath('air-to-cash')
+            }
+          } 
+          to='/home/air-to-cash' 
+          className='home__tab px-1 py-2 border-2 border-[transparent] rounded-[1100px] text-base text-dark font-semibold'
+        >Airtime 2 Cash
+        </Link>
+        <button disabled className='home__tab px-8 py-3 text-base text-gray-100 cursor-no-drop'>Pay Bills</button>
+      </nav>
     </div>
   )
 }

@@ -73,6 +73,10 @@
   .nav__link.active {
     color: #00C297;
   }
+  .home__tab.active {
+    background: #C9DDF7;
+    @apply text-sm px-6 py-[10px];
+  }
   .input__field {
     @apply block w-full text-base outline-none text-dark-200 px-4 py-3 border border-gray-200 rounded-lg bg-[calc(100%-18px)] bg-no-repeat placeholder:text-gray-100 focus:border-[#37C779];
   }
