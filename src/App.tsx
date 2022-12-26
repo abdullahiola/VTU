@@ -30,17 +30,17 @@ function App() {
           <div className=" app bg-white font-normal text-base text-dark relative overflow-x-hidden">
             <Menu />
             <Routes>
-              <Route path="/" element={<Dashboard Component={Home} />} />
-              <Route path="/home" element={<Dashboard Component={Home} />} >
-                <Route path=":dashboard" element={<Dashboard Component={Home} />}></Route>
-              </Route>
-              <Route path="/wallet" element={<Dashboard Component={Wallet} />} />
-              <Route path="/transactions" element={<Dashboard Component={Transaction} />} />
-              <Route path="/beneficiaries" element={<Dashboard Component={Beneficiaries} />} />
-              <Route path="/analytics" element={<Dashboard Component={Analytics} />} />
-              <Route path="/notifications" element={<Dashboard Component={Notifications} />} />
-              <Route path="/help" element={<Dashboard Component={Help} />} />
-              <Route path="/profile" element={<Dashboard Component={Profile} />} />
+              <Route path="/" element={<Dashboard Component={<Home route='/'/>} />} />
+              <Route path="/buy-airtime" element={<Dashboard Component={<Home route='buy-airtime'/>} />} />
+              <Route path="/buy-data" element={<Dashboard Component={<Home route='buy-data'/>} />} />
+              <Route path="/air-to-cash" element={<Dashboard Component={<Home route='air-to-cash'/>} />} />
+              <Route path="/wallet" element={<Dashboard Component={<Wallet />} />} />
+              <Route path="/transactions" element={<Dashboard Component={<Transaction />} />} />
+              <Route path="/beneficiaries" element={<Dashboard Component={<Beneficiaries />} />} />
+              <Route path="/analytics" element={<Dashboard Component={<Analytics />} />} />
+              <Route path="/notifications" element={<Dashboard Component={<Notifications />} />} />
+              <Route path="/help" element={<Dashboard Component={<Help />} />} />
+              <Route path="/profile" element={<Dashboard Component={<Profile />} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/reset" element={<Require><ResetPassword /></Require>} />
