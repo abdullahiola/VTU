@@ -31,6 +31,9 @@ function App() {
             <Menu />
             <Routes>
               <Route path="/" element={<Dashboard Component={Home} />} />
+              <Route path="/home" element={<Dashboard Component={Home} />} >
+                <Route path=":dashboard" element={<Dashboard Component={Home} />}></Route>
+              </Route>
               <Route path="/wallet" element={<Dashboard Component={Wallet} />} />
               <Route path="/transactions" element={<Dashboard Component={Transaction} />} />
               <Route path="/beneficiaries" element={<Dashboard Component={Beneficiaries} />} />
