@@ -68,7 +68,7 @@ const Menu = () => {
         <div className='mt-[39px] mb-[18px] px-6'>
           <button className='flex items-center justify-start'>
             <LogoutIcon />
-            <span className='ml-5'>Log Out</span>
+            <span className='ml-5 text-red'>Log Out</span>
           </button>
         </div>
         <div className='pb-4 px-6 flex items-center'>

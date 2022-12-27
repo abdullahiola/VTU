@@ -10,7 +10,7 @@ const Dashboard = ({Component, ...props}: DashboardType) => {
   return (
     <div>
       <Nav />
-      <Component />
+      {Component}
     </div>
   )
 }
