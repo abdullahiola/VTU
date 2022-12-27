@@ -1,5 +1,5 @@
 
-import {HiOutlineArrowNarrowRight} from 'react-icons/Hi'
+import {BsArrowRight} from 'react-icons/bs'
 import {CardPropsType} from '../../types/card.types'
 
 const Card = ({bgColor, title, icon, detail}: CardPropsType) => {
@@ -14,7 +14,7 @@ const Card = ({bgColor, title, icon, detail}: CardPropsType) => {
           <h6 className=' text-base font-semibold md:mb-1'>{title}</h6>
           <p className='text-sm text-gray-500 hidden md:block'>{detail}</p>
         </div>
-        <HiOutlineArrowNarrowRight className={`text-base cursor-pointer md:text-[18.67px]`} />
+        <BsArrowRight className={`text-base cursor-pointer md:text-[18.67px]`} />
       </div>
     </div>
   )
