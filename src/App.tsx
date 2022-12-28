@@ -27,7 +27,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <AppContextProvider>
-          <div className=" app bg-white font-normal text-base text-dark relative overflow-x-hidden">
+          <div className=" app bg-[#FAFAFA] font-normal text-base text-dark relative overflow-x-hidden">
             <Menu />
             <Routes>
               <Route path="/" element={<Dashboard Component={<Home route='/'/>} />} />
