@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import {AiOutlinePlus} from 'react-icons/ai'
+import {AiOutlinePlus, AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import { NavLink as Link } from 'react-router-dom'
 import { HomePropsType, HomeTabsPropsType, HomeTabDetailsPropsType } from '../../types/dashboard.types'
 import BuyAirtime from '../ui/BuyAirtime'
@@ -11,7 +11,7 @@ const Home = ({route}: HomePropsType) => {
   const [path, setPath] = useState('buy-airtime')
 
   return (
-    <div className='px-6 md:px-12'>
+    <div className=''>
       <FundDetail />
       <Tabs setPath={setPath} />
       <div>
@@ -23,16 +23,32 @@ const Home = ({route}: HomePropsType) => {
 
 export const FundDetail = () => {
 
+  const [visible, setVisibility] = useState(false)
+
   const balance = 245750.57
   const formattedBalance = balance.toLocaleString().split('.')
   const wholePart = formattedBalance[0]
   const decimalPart = formattedBalance[1]
 
   return (
-    <section className='flex items-end justify-between pt-[29.5px] pb-24 md:items-center'>
+    <section className='flex items-end justify-between pt-[29.5px] pb-24 px-6 md:px-12 md:items-center'>
       <div>
         <p className='text-sm mb-[2px] md:text-base md:mb-[14px]'>Total Balance</p>
-        <h4>₦{wholePart}<span className='text-gray-500'>.{decimalPart}</span></h4>
+        <h4>
+          {
+            visible ? 
+              <Fragment>
+                <span>₦{wholePart}</span><span className='text-gray-500'>.{decimalPart}</span>
+              </Fragment> : <span className='text-3xl font-black'>#######</span>
+          }
+          <span onClick={() => setVisibility(!visible)} className='text-base cursor-pointer relative ml-2'>
+            {
+              visible ? 
+              <AiOutlineEye className='text-base absolute inset-0 inline-block' /> :
+              <AiOutlineEyeInvisible className='text-base absolute inset-0 inline-block' />
+            }
+          </span>
+        </h4>
       </div>
       <div>
         <AiOutlinePlus fontSize='22px' className='text-[#000] cursor-pointer mb-2 md:hidden' />
@@ -46,7 +62,7 @@ export const Tabs = ({setPath}: HomeTabsPropsType) => {
 
 
   return (
-    <div className='overflow-x-scroll'>
+    <div className='overflow-x-scroll px-6 md:px-12'>
       <nav className='flex gap-x-3 items-center justify-start py-2 px-1 h-full w-max'>
         <Link
           onClick={() => {setPath && setPath('buy-airtime')}}

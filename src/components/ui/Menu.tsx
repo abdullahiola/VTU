@@ -38,13 +38,13 @@ const Menu = () => {
   }
 
   return (
-    <div style={menuBoxStyle} className='bg-white shadow-xl fixed h-full top-0 left-0 w-screen overflow-x-hidden md:hidden'>
+    <div style={menuBoxStyle} className='bg-white z-10 shadow-xl fixed h-full top-0 left-0 w-screen overflow-x-hidden md:hidden'>
       <div  className='w-full h-full'>
         <div className='flex items-center justify-between p-6'>
           <div className='w-[100px]'><img src={Logo} /></div>
           <IoCloseSharp onClick={() => {setMenuState && setMenuState(false)}} fontSize="24px" className='cursor-pointer' />
         </div>
-        <hr className='h-[1px] bg-gray-100 '/>
+        <hr className='h-[1px] border-0 bg-gray-100 '/>
         <section>
           <div className='py-[28px] px-6'>
             <h6 className='mb-[26px]'>Hi, Khalid</h6>
@@ -52,13 +52,13 @@ const Menu = () => {
               {menuListFn('primary')}
             </ul>
           </div>
-          <hr className='h-[3px] bg-gray-100 '/>
+          <hr className='h-[2px] border-0 bg-gray-100 '/>
           <div className='py-[28px] px-6'>
             <ul className='flex flex-col gap-y-6'>
               {menuListFn('secondary')}
             </ul>
           </div>
-          <hr className='h-[3px] bg-gray-100 '/>
+          <hr className='h-[2px] border-0 bg-gray-100 '/>
           <div className='py-[28px] px-6'>
             <ul className='flex flex-col gap-y-6'>
               {menuListFn('tertiary')}
