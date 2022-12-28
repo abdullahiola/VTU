@@ -2,7 +2,7 @@ import React from 'react'
 
 const Help = () => {
   return (
-    <div>Help</div>
+    <div className='page__control'>Help</div>
   )
 }
 

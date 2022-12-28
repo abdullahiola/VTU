@@ -2,7 +2,7 @@ import React from 'react'
 
 const Wallet = () => {
   return (
-    <div>Wallet</div>
+    <div className='page__control'>Wallet</div>
   )
 }
 

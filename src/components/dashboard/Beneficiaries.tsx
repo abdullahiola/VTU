@@ -2,7 +2,7 @@ import React from 'react'
 
 const Beneficiaries = () => {
   return (
-    <div>Beneficiaries</div>
+    <div className='page__control'>Beneficiaries</div>
   )
 }
 

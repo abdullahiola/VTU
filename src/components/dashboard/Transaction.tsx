@@ -2,7 +2,7 @@ import React from 'react'
 
 const Transaction = () => {
   return (
-    <div>Transaction</div>
+    <div className='page__control'>Transaction</div>
   )
 }
 

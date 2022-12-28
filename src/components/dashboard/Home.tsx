@@ -11,7 +11,7 @@ const Home = ({route}: HomePropsType) => {
   const [path, setPath] = useState('buy-airtime')
 
   return (
-    <div className=''>
+    <div className='page__control'>
       <FundDetail />
       <Tabs setPath={setPath} />
       <div>
@@ -23,7 +23,7 @@ const Home = ({route}: HomePropsType) => {
 
 export const FundDetail = () => {
 
-  const [visible, setVisibility] = useState(false)
+  const [visible, setVisibility] = useState(true)
 
   const balance = 245750.57
   const formattedBalance = balance.toLocaleString().split('.')
@@ -43,7 +43,7 @@ export const FundDetail = () => {
           }
           <span onClick={() => setVisibility(!visible)} className='text-base cursor-pointer relative ml-2'>
             {
-              visible ? 
+              !visible ? 
               <AiOutlineEye className='text-base absolute inset-0 inline-block' /> :
               <AiOutlineEyeInvisible className='text-base absolute inset-0 inline-block' />
             }

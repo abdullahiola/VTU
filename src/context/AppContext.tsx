@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useRef, useState } from 'react'
 
 type AppContextPropsType = {
   children: React.ReactNode
@@ -13,6 +13,8 @@ export type AppContextValueType = {
   setMenuState?: React.Dispatch<React.SetStateAction<boolean>>
   notification?: number
   setNotification?: React.Dispatch<React.SetStateAction<number>>
+  dashboardMenuState?: boolean,
+  setDashboardMenuState?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AppContext = createContext({} as AppContextValueType)
@@ -23,6 +25,7 @@ const AppContextProvider = ({children, ...props}: AppContextPropsType) => {
   const [userId, setUserId] = useState<string | undefined>(undefined)
   const [menuState, setMenuState] = useState<boolean>(false)
   const [notification, setNotification] = useState(0)
+  const [dashboardMenuState, setDashboardMenuState] = useState(false)
   
   const valueObj = {
     validateUserAccess,
@@ -32,7 +35,9 @@ const AppContextProvider = ({children, ...props}: AppContextPropsType) => {
     menuState,
     setMenuState,
     notification,
-    setNotification
+    setNotification, 
+    dashboardMenuState,
+    setDashboardMenuState,
   }
 
   return (

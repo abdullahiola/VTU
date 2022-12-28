@@ -45,6 +45,12 @@
   li>a>svg.fill {
     fill: #161616;
   }
+  li>div.nav>svg.stroke {
+    stroke: #161616;
+  }
+  li>div.nav>svg.fill {
+    fill: #161616;
+  }
   li>a>span {
     color: #161616;
   }
@@ -57,6 +63,9 @@
   }
   li>a[aria-current='page']>span {
     color: #00C297;
+  }
+  li>a.menu__nav[aria-current='page'] {
+    background: #EFFBF8;
   }
 
   li:hover a>svg.stroke {
@@ -72,8 +81,14 @@
 
 
 @layer components {
+  .page__control {
+    min-height: calc(100vh - 84px);
+  }
   .nav__link.active {
     color: #00C297;
+  }
+  .menu__nav.active {
+    color: #EFFBF8;
   }
   .home__tab.active {
     background: #EFEFEF;
