@@ -11,7 +11,7 @@ const Home = ({route}: HomePropsType) => {
   const [path, setPath] = useState('buy-airtime')
 
   return (
-    <div className=''>
+    <div className='page__control'>
       <FundDetail />
       <Tabs setPath={setPath} />
       <div>

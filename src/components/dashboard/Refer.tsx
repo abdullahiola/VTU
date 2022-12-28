@@ -2,7 +2,7 @@ import React from 'react'
 
 const Refer = () => {
   return (
-    <div className=''>Refer</div>
+    <div className='page__control'>Refer</div>
   )
 }
 
