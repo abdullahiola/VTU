@@ -16,6 +16,8 @@ import Wallet from "./components/dashboard/Wallet"
 import Transaction from "./components/dashboard/Transaction"
 import Beneficiaries from "./components/dashboard/Beneficiaries"
 import Analytics from "./components/dashboard/Analytics"
+import Settings from "./components/dashboard/Settings"
+import Refer from "./components/dashboard/Refer"
 import Profile from "./components/dashboard/Profile"
 import Help from "./components/dashboard/Help-Support"
 import Notifications from "./components/dashboard/Notifications"
@@ -41,6 +43,8 @@ function App() {
               <Route path="/notifications" element={<Dashboard Component={<Notifications />} />} />
               <Route path="/help" element={<Dashboard Component={<Help />} />} />
               <Route path="/profile" element={<Dashboard Component={<Profile />} />} />
+              <Route path="/settings" element={<Dashboard Component={<Settings />} />} />
+              <Route path="/refer" element={<Dashboard Component={<Refer />} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/reset" element={<Require><ResetPassword /></Require>} />
