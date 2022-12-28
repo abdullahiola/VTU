@@ -33,7 +33,7 @@ const Nav = () => {
                 {
                   menuNavData.secondary.map(({Icon, title, to}, index) => {
                     return (
-                      <li key={index}><Link to={to} className='menu__nav flex py-[14px] items-center justify-start px-8'><Icon /><span className='ml-[18px] font-semibold'>{title}</span></Link></li>
+                      <li onClick={() => {setDashboardMenuState && setDashboardMenuState(!dashboardMenuState)}} key={index}><Link to={to} className='menu__nav flex py-[14px] items-center justify-start px-8'><Icon /><span className='ml-[18px] font-semibold'>{title}</span></Link></li>
                     )
                   })
                 }
@@ -43,7 +43,7 @@ const Nav = () => {
               {
                   menuNavData.tertiary.map(({Icon, title, to}, index) => {
                     return (
-                      <li key={index}><Link to={to} className='menu__nav flex py-[14px] items-center justify-start px-8'><Icon /><span className='ml-[18px] font-semibold'>{title}</span></Link></li>
+                      <li onClick={() => {setDashboardMenuState && setDashboardMenuState(!dashboardMenuState)}} key={index}><Link to={to} className='menu__nav flex py-[14px] items-center justify-start px-8'><Icon /><span className='ml-[18px] font-semibold'>{title}</span></Link></li>
                     )
                   })
                 }
