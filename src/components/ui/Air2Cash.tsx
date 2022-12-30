@@ -15,9 +15,9 @@ const Air2Cash = () => {
     <div>
       <section className='overflow-x-scroll pt-4 pb-16 px-6 md:px-12 md:pb-20'>
         <div className='flex items-center w-max justify-between gap-x-4 px-1 md:w-full md:gap-x-8'>
-          <Card bgColor='#C9DDF7' icon={Icon1} title='Mtn' detail={airtelMsg} />
-          <Card bgColor='#F4E8D3' icon={Icon2} title='Glo' detail={mtnMsg} />
-          <Card bgColor='#D7F4E4' icon={Icon3} title='Airtel' detail={gloMsg} />
+          <Card bgColor='#C9DDF7' icon={Icon1} title='Mtn' detail={mtnMsg} />
+          <Card bgColor='#F4E8D3' icon={Icon2} title='Glo' detail={gloMsg} />
+          <Card bgColor='#D7F4E4' icon={Icon3} title='Airtel' detail={airtelMsg} />
           <Card bgColor='#EADBF4' icon={Icon1} title='9MOBILE' detail={nMobileMsg} />
         </div>
       </section>
