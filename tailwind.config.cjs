@@ -82,6 +82,7 @@ module.exports = {
         400: "#F62E2E",
       },
       white: "#FCFCFC",
+      flow: "#FAFAFA",
       accent: "#F4E8D3"
       // ...
     },
