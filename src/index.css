@@ -100,5 +100,8 @@
   .submit__btn {
     @apply  block w-full py-3 px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase hover:bg-green-700 focus:bg-green-700 disabled:bg-green-400 disabled:cursor-no-drop;
   }
+  .flow__btn {
+    @apply w-full uppercase mt-12 text-white bg-green py-[18px] rounded-lg text-sm font-bold hover:bg-green-700 disabled:bg-gray-100 disabled:cursor-no-drop
+  }
 }
 
