@@ -59,3 +59,38 @@ export const menuNavData: MenuType = {
     }
   ]
 }
+
+export const userData = {
+  "favorites": [
+    {
+      "name": "Me",
+      "number": "08115716657",
+      "color": "#6B82B0"
+    },
+    {
+      "name": "Dino Onyemere",
+      "number": "08115716657",
+      "color": "#37C779"
+    },
+    {
+      "name": "Isa Abdukhalid",
+      "number": "08115716657",
+      "color": "#8E97FD"
+    },
+    {
+      "name": "Collins Chinedu",
+      "number": "08115716657",
+      "color": "#6B82B0"
+    },
+    {
+      "name": "Sikiru Abdullahi",
+      "number": "08115716657",
+      "color": "#EFC218"
+    },
+    {
+      "name": "Seun Oladele",
+      "number": "08115716657",
+      "color": "#FF3434"
+    },
+  ]
+}
