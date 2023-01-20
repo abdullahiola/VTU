@@ -3,7 +3,6 @@ export type CardPropsType = {
   icon: any
   title: string
   detail?: string
-  onClick: () => void
 }
 
 export type TransactionCardPropsType = {

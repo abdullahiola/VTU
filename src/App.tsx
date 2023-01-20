@@ -6,7 +6,7 @@ import AuthProvider from "./auth/Auth"
 import Require from "./auth/Require"
 import AppContextProvider from "./context/AppContext"
 import { FlowActionControl } from "./components/dashboard/flows/FlowContainer"
-import Loading from './components/utilities/Loading'
+const AirtimeFlow = lazy(() => import('./components/dashboard/flows/Airtime/AirtimeFlow'))
 const Error = lazy(() => import('./pages/Error/Error.page'));
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard.page'));
 const Login = lazy(() => import('./pages/authentication/Login.page'));
@@ -26,6 +26,25 @@ const Help = lazy(() => import('./components/dashboard/Help-Support'));
 const Notifications = lazy(() => import('./components/dashboard/Notifications'));
 
 export const queryClient = new QueryClient()
+
+
+export const Loader = () => {
+  return (
+    <div className=' w-full h-full flex items-center justify-center'>
+      <div className="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
 
   return (
@@ -33,12 +52,19 @@ function App() {
       <AuthProvider>
         <AppContextProvider>
           <div className=" app bg-[#FAFAFA] font-normal text-base text-dark relative overflow-x-hidden">
-            <FlowActionControl action="airtime" />
-            <Suspense fallback={<Loading screen />}>
+            <Suspense fallback={<div className='w-screen h-screen'><Loader /></div>}>
               <Menu />
               <Routes>
                 <Route path="/" element={<Dashboard Component={<Home route='/'/>} />} />
                 <Route path="/buy-airtime" element={<Dashboard Component={<Home route='buy-airtime'/>} />} />
+                <Route path='/top-up'>
+                  <Route path='airtime'>
+                    <Route path='1' element={<FlowActionControl Component={<AirtimeFlow route='1' />} />} />
+                    <Route path='2' element={<FlowActionControl Component={<AirtimeFlow route='2' />} />} />
+                    <Route path='3' element={<FlowActionControl Component={<AirtimeFlow route='3' />} />} />
+                    <Route path='4' element={<FlowActionControl Component={<AirtimeFlow route='4' />} />} />
+                  </Route>
+                </Route>
                 <Route path="/buy-data" element={<Dashboard Component={<Home route='buy-data'/>} />} />
                 <Route path="/air-to-cash" element={<Dashboard Component={<Home route='air-to-cash'/>} />} />
                 <Route path="/wallet" element={<Dashboard Component={<Wallet />} />} />
@@ -54,7 +80,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/reset" element={<Require><ResetPassword /></Require>} />
                 <Route path="/confirm-reset" element={<Require><ResetConfirmation /></Require>} />
-                <Route path="*" element={<Suspense fallback={<Loading full />}><Error /></Suspense>} />
+                <Route path="*" element={<Suspense fallback={<div className='w-screen h-screen'><Loader /></div>}><Error /></Suspense>} />
               </Routes>
             </Suspense>
           </div>
