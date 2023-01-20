@@ -22,10 +22,10 @@ export const TransactionCard = ({bgColor, bgImg, provider, amount, name, number}
   )
 }
 
-const Card = ({bgColor, title, icon, detail, onClick}: CardPropsType) => {
+const Card = ({bgColor, title, icon, detail}: CardPropsType) => {
 
   return (
-    <div onClick={onClick} style={{backgroundColor: bgColor}} className="flex flex-col justify-between py-7 px-4 w-[148px] h-[135px] rounded-lg md:py-6 md:px-4 md:w-[288px] md:h-[182px] md:rounded-xl">
+    <div style={{backgroundColor: bgColor}} className="flex flex-col justify-between py-7 px-4 w-[148px] h-[135px] rounded-lg md:py-6 md:px-4 md:w-[288px] md:h-[182px] md:rounded-xl">
       <div className='w-6 h-6'>
         <img src={icon} className='w-full h-full' />
       </div>

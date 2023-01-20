@@ -5,13 +5,16 @@ export type BaseFlowPropsType = {
   page: number
 }
 
+export type AirtimeFlowPropsType = {
+  route: string
+}
+
 export type ActionPropsType = {
-  action: string
+  Component: React.ReactNode
 }
 
 export type PhasePropsType = {
-  setDesktopNextPage: React.Dispatch<React.SetStateAction<number>>
-  setMobileNextPage: React.Dispatch<React.SetStateAction<number>>
+  
 }
 
 export type TransactionFlowPropsType = {
