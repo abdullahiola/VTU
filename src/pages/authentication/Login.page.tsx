@@ -13,6 +13,7 @@ import { UserType } from '../../types/global.types'
 import { UseQueryResult } from 'react-query'
 import Button from '../../components/form/Button'
 import { AuthContext } from '../../auth/Auth'
+import { UserDataContext } from '../../context/UserDataContext'
 
 type ValueType = {
   email: string
@@ -29,6 +30,7 @@ const Login = () => {
     })
     if (userDetails.length) {
       if (resetRef.current) {
+        // userEmailRef.current && setUserEmail(userEmailRef.current)
         reset(resetRef.current)
         login()
       }
@@ -43,6 +45,7 @@ const Login = () => {
 
   const {isLoading, error, refetch}: UseQueryResult<DetailsTypes, ErrorTypes> = useUserData(queryId, onSuccess, onError)
   const {login} = useContext(AuthContext)
+  const {setUserEmail} = useContext(UserDataContext)
   const resetRef = useRef<(() => void) | null>(null)
   const userEmailRef = useRef<string | null>(null)
   const userPasswordRef = useRef<string | null>(null)
