@@ -21,7 +21,7 @@ const BuyAirtime = () => {
           <Link to='/top-up/airtime/1'>
             <Card bgColor='#F4E8D3' icon={Icon2} title='Glo' detail={msg} />
           </Link>
-          <Link to='/top-up/airtime/'>
+          <Link to='/top-up/airtime/1'>
             <Card bgColor='#D7F4E4' icon={Icon3} title='Airtel' detail={msg} />
           </Link>
           <Link to='/top-up/airtime/1'>

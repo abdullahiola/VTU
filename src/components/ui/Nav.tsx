@@ -5,11 +5,15 @@ import { menuNavData } from '../../assets/data/appdata'
 import { NotificationAlertIcon, NotificationIcon, ProfileIcon, QuestionIcon, LogoutIcon } from '../../assets/data/svg-icon'
 import Logo from '../../assets/media/Frame 7264.svg'
 import { AppContext } from '../../context/AppContext'
+import { UserDataContext } from '../../context/UserDataContext'
+import { AuthContext } from '../../auth/Auth'
 
 const Nav = () => {
 
   const {notification, menuState, setMenuState, dashboardMenuState, setDashboardMenuState} = useContext(AppContext)
-  const name = 'Khalid'
+  const {logout} = useContext(AuthContext)
+  const {userEmail} = useContext(UserDataContext)
+  const name = userEmail || 'User'
 
   return (
     <header>
@@ -48,7 +52,7 @@ const Nav = () => {
                   })
                 }
               </ul>
-              <div className='flex items-center justify-start px-8'><LogoutIcon /><span className='text-red px-8'>Log Out</span></div>
+              <div onClick={() => {(setDashboardMenuState && setDashboardMenuState(false)); logout()}} className='flex items-center justify-start px-8 cursor-pointer'><LogoutIcon /><span className='text-red px-8'>Log Out</span></div>
             </aside>
         }
         <div className=' w-[144px]'><Link to='/' className='w-full h-full'><img src={Logo} className='w-full h-full' /></Link></div>
