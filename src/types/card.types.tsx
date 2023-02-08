@@ -12,4 +12,5 @@ export type TransactionCardPropsType = {
   amount: string
   name: string
   number: string
+  plan?: string
 }
