@@ -13,6 +13,7 @@ import { UserType } from '../../types/global.types'
 import Input from '../../components/form/Input'
 import Button from '../../components/form/Button'
 import { AuthContext } from '../../auth/Auth'
+import { UserDataContext } from '../../context/UserDataContext'
 
 type ValueType = {
   email: string
@@ -34,6 +35,7 @@ const Signup = () => {
       const id = generateId()
       postUser({id, email: userIdRef.current, password: userPasswordRef.current})
       reset(resetRef.current!)
+      // setUserEmail(userIdRef.current)
       login()
     }
   }
@@ -45,6 +47,7 @@ const Signup = () => {
   const {mutate: createUser} = useCreateUser()
   const {isLoading, error, refetch} = useUserData(queryId, onSuccess, onError)
   const {login} = useContext(AuthContext)
+  const {setUserEmail} = useContext(UserDataContext)
   const [errorState, setErrorState] = useState(false)
   const [visibility, setVisibility] = useState<VisibilityType>({password: false})
   const [networkError, setNetworkError] = useState(false)

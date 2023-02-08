@@ -5,7 +5,7 @@ import MTN from '../../../../assets/media/MTN.svg'
 import { AppContext } from '../../../../context/AppContext'
 import { PhasePropsType } from '../../../../types/flow.type'
 import { TransactionFlowContext } from '../../../../context/TransactionFlowContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Overlay from '../../../utilities/Overlay'
 import Home from '../../Home'
 
@@ -49,12 +49,6 @@ const Phase1 = ({}: PhasePropsType) => {
   const nextPage = () => {
     navigate('/top-up/airtime/2')
   }  
-
-  const onSubmit = () => {
-    setTransactionState({...transactionState, provider: selectedProvider, amount: amountValue})
-    setVerified(true)
-    nextPage()
-  }
   
   const objVals = Object.entries(providerObj)
  
@@ -65,6 +59,12 @@ const Phase1 = ({}: PhasePropsType) => {
   const otherProvider = objVals.filter((item: [string, boolean]) => { 
     return item[1] === false
   })
+
+  const onSubmit = () => {
+    setTransactionState({...transactionState, provider: selectedProvider, amount: amountValue})
+    setVerified(true)
+    nextPage()
+  }
 
   useEffect(() => {
     setVerified(false)
@@ -81,8 +81,8 @@ const Phase1 = ({}: PhasePropsType) => {
             <IoCloseSharp onClick={() => navigate('/')} fontSize={24} className='text-gray-200 cursor-pointer' />
           </div>
           <nav className='mb-12'>
-            <button style={{borderColor: sectionState === 'airtime' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('airtime')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2 mr-6'>Airtime</button>
-            <button style={{borderColor: sectionState === 'data' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('data')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2'>Data</button>
+            <button style={{borderColor: sectionState === 'airtime' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('airtime')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2 mr-6'><Link to='/top-up/airtime/1'>Airtime</Link></button>
+            <button style={{borderColor: sectionState === 'data' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('data')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2'><Link to='/top-up/data/1'>Data</Link></button>
           </nav>
           {
             sectionState === 'airtime' ? 
@@ -174,15 +174,15 @@ const Phase1 = ({}: PhasePropsType) => {
       <div className='hidden md:block'>
         <Home route='/'/>
         <Overlay top={true} opacity={0.5}>
-          <div className='w-[432px] h-fit rounded-xl bg-flow mt-16'>
+          <div className='w-[432px] h-fit rounded-xl bg-flow mt-8'>
             <div className='w-full h-full py-9 px-6'>
               <div className='flex items-center justify-between mb-2'>
                 <h6>Mobile Top Up</h6>
                 <IoCloseSharp onClick={() => navigate('/')} fontSize={24} className='text-gray-200 cursor-pointer' />
               </div>
               <nav className='mb-12'>
-                <button style={{borderColor: sectionState === 'airtime' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('airtime')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2 mr-6'>Airtime</button>
-                <button style={{borderColor: sectionState === 'data' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('data')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2'>Data</button>
+                <Link to='/top-up/airtime/1' style={{borderColor: sectionState === 'airtime' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('airtime')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2 mr-6'>Airtime</Link>
+                <Link to='/top-up/data/1' style={{borderColor: sectionState === 'data' ? '#00C297' : 'transparent'}} onClick={() => setSectionState('data')} className='text-gray-500 text-base border-b-[3px] border-[transparent] py-2'>Data</Link>
               </nav>
               {
                 sectionState === 'airtime' ? 

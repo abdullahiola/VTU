@@ -25,7 +25,7 @@ const Phase3 = ({}: PhasePropsType) => {
   }
 
   const nextPage = () => {
-    navigate('/top-up/airtime/4')
+    navigate('/top-up/data/4')
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,11 +46,11 @@ const Phase3 = ({}: PhasePropsType) => {
         <div className='min-w-full min-h-screen py-9 px-6 bg-flow md:px-9'>
           <div className='flex items-center justify-between mb-2'>
             <h6 className='text-[20px] md:text-xl'>Review  Transaction</h6>
-            <IoCloseSharp onClick={() => navigate('/')} fontSize={24} className='text-gray-200 cursor-pointer' />
+            <IoCloseSharp onClick={() => navigate('/buy-data')} fontSize={24} className='text-gray-200 cursor-pointer' />
           </div>
           <p className='text-[12px] text-gray-500 mb-12 md:mb-[28px]'>Please review the details of the airtime top up and ensure they are correct before you proceed</p>
           <div className='w-full h-fit mb-8'>
-            <TransactionCard name={name} number={number} provider={provider} amount={amount} bgColor='#C9DDF7' bgImg={bg} />
+            <TransactionCard name={name} number={number} provider={provider} amount={amount.split('----- ')[1]} plan={amount.split('----- ')[0]} bgColor='#C9DDF7' bgImg={bg} />
           </div>
           <form onSubmit={e => onSubmit(e)}>
             <div>
@@ -66,16 +66,16 @@ const Phase3 = ({}: PhasePropsType) => {
         </div>
       </div>
       <div className=' hidden md:block'>
-        <Home route='/' />
+        <Home route='buy-data' />
         <Overlay top={true} opacity={0.5}>
         <div className='w-[432px] h-fit py-9 px-6 bg-flow rounded-xl mt-8'>
           <div className='flex items-center justify-between mb-2'>
             <h6 className='text-[20px] md:text-xl'>Review  Transaction</h6>
-            <IoCloseSharp onClick={() => navigate('/')} fontSize={24} className='text-gray-200 cursor-pointer' />
+            <IoCloseSharp onClick={() => navigate('/buy-data')} fontSize={24} className='text-gray-200 cursor-pointer' />
           </div>
           <p className='text-[12px] text-gray-500 mb-12 md:mb-[28px]'>Please review the details of the airtime top up and ensure they are correct before you proceed</p>
           <div className='w-full h-fit mb-8'>
-            <TransactionCard name={name} number={number} provider={provider} amount={amount} bgColor='#C9DDF7' bgImg={bg} />
+            <TransactionCard name={name} number={number} provider={provider} amount={amount.split('----- ')[1]} plan={amount.split('----- ')[0]} bgColor='#C9DDF7' bgImg={bg} />
           </div>
           <form onSubmit={e => onSubmit(e)}>
             <div>

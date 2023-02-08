@@ -5,9 +5,13 @@ export type BaseFlowPropsType = {
   page: number
 }
 
-export type AirtimeFlowPropsType = {
+export type routedType = {
   route: string
 }
+
+export type AirtimeFlowPropsType = routedType
+
+export type DataFlowPropsType = routedType
 
 export type ActionPropsType = {
   Component: React.ReactNode
@@ -49,3 +53,4 @@ export type TransactionFlowContextType = {
     four: boolean;
   }>>
 }
+ 

@@ -6,10 +6,15 @@ import {MenuObjType, MenuType} from '../../types/menu.type'
 import Logo from '../../assets/media/Frame 7264.svg'
 import { LogoutIcon } from '../../assets/data/svg-icon'
 import { AppContext } from '../../context/AppContext'
+import { UserDataContext } from '../../context/UserDataContext'
+import { AuthContext } from '../../auth/Auth'
 
 const Menu = () => {
 
   const {menuState, setMenuState} = useContext(AppContext)
+  const {userEmail} = useContext(UserDataContext)
+  const name = userEmail || 'User'
+  const {logout} = useContext(AuthContext)
 
   const menuListFn = (action: 'primary' | 'secondary' | 'tertiary') => {
     return (
@@ -47,7 +52,7 @@ const Menu = () => {
         <hr className='h-[1px] border-0 bg-gray-100 '/>
         <section>
           <div className='py-[28px] px-6'>
-            <h6 className='mb-[26px]'>Hi, Khalid</h6>
+            <h6 className='mb-[26px]'>Hi, {name}</h6>
             <ul className='flex flex-col gap-y-6'>
               {menuListFn('primary')}
             </ul>
@@ -66,7 +71,7 @@ const Menu = () => {
           </div>
         </section>
         <div className='mt-[39px] mb-[18px] px-6'>
-          <button className='flex items-center justify-start'>
+          <button onClick={() => { (setMenuState && setMenuState(false)); logout()}} className='flex items-center justify-start'>
             <LogoutIcon />
             <span className='ml-5 text-red'>Log Out</span>
           </button>

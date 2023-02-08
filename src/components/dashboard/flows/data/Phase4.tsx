@@ -13,7 +13,7 @@ const Phase4 = () => {
   const navigate = useNavigate()
   const {transactionState} = useContext(TransactionFlowContext)
   const close = () => {
-    navigate('/')
+    navigate('/buy-data')
   }
 
   return (
@@ -25,8 +25,8 @@ const Phase4 = () => {
           </div>
           <div className='w-full'>
             <div className='pt-12 text-center'>
-              <h6 className='pb-2'>Airtime Mobile Top Up</h6>
-              <p className='text-gray-500 text-sm'>You have successfully credited airtime top of {transactionState.amount} to {transactionState.number}-{transactionState.name}</p>
+              <h6 className='pb-2'>Mobile Top Up  Successful</h6>
+              <p className='text-gray-500 text-sm'>Your <span className='text-[#37C779]'>{transactionState.amount}</span> data subscription for {transactionState.number}- {transactionState.name} was successful</p>
             </div>
             <div className='w-full h-full flex items-center justify-center pt-12 pb-24'>
               <div className='w-[90px] aspect-square'><img src={Thumbs} alt="successful" /></div>
@@ -48,7 +48,7 @@ const Phase4 = () => {
           <div className='w-full'>
             <div className='pt-12 text-center'>
               <h6 className='pb-4'>Mobile Top Up  Successful</h6>
-              <p className='text-gray-500 text-sm'>You have successfully credited airtime top of {transactionState.amount} to {transactionState.number}-{transactionState.name}</p>
+              <p className='text-gray-500 text-sm'>Your <span className='text-[#37C779]'>{transactionState.amount}</span> data subscription for {transactionState.number}- {transactionState.name} was successful</p>
             </div>
             <div className='w-full h-full flex items-center justify-center pt-6 pb-10'>
               <div className='w-[120px] aspect-square'><img src={Thumbs} alt="successful" /></div>

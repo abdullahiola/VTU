@@ -7,6 +7,7 @@ import Require from "./auth/Require"
 import AppContextProvider from "./context/AppContext"
 import { FlowActionControl } from "./components/dashboard/flows/FlowContainer"
 const AirtimeFlow = lazy(() => import('./components/dashboard/flows/Airtime/AirtimeFlow'))
+const DataFlow = lazy(() => import('./components/dashboard/flows/data/DataFlow'))
 const Error = lazy(() => import('./pages/Error/Error.page'));
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard.page'));
 const Login = lazy(() => import('./pages/authentication/Login.page'));
@@ -63,6 +64,12 @@ function App() {
                     <Route path='2' element={<FlowActionControl Component={<AirtimeFlow route='2' />} />} />
                     <Route path='3' element={<FlowActionControl Component={<AirtimeFlow route='3' />} />} />
                     <Route path='4' element={<FlowActionControl Component={<AirtimeFlow route='4' />} />} />
+                  </Route>
+                  <Route path='data'>
+                    <Route path='1' element={<FlowActionControl Component={<DataFlow route='1' />} />} />
+                    <Route path='2' element={<FlowActionControl Component={<DataFlow route='2' />} />} />
+                    <Route path='3' element={<FlowActionControl Component={<DataFlow route='3' />} />} />
+                    <Route path='4' element={<FlowActionControl Component={<DataFlow route='4' />} />} />
                   </Route>
                 </Route>
                 <Route path="/buy-data" element={<Dashboard Component={<Home route='buy-data'/>} />} />

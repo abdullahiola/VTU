@@ -18,7 +18,7 @@ const Phase2 = ({}: PhasePropsType) => {
   const {transactionState, setTransactionState, verified, setVerified} = useContext(TransactionFlowContext)
 
   const nextPage = () => {
-    navigate('/top-up/airtime/3')
+    navigate('/top-up/data/3')
   }
   
   const mockUsers = [
@@ -45,7 +45,7 @@ const Phase2 = ({}: PhasePropsType) => {
   }
 
   const prevPage = () => {
-    navigate('/top-up/airtime/1')
+    navigate('/top-up/data/1')
   }  
 
   function isValid(str: string) {
@@ -111,7 +111,7 @@ const Phase2 = ({}: PhasePropsType) => {
         </div>
       </div>
       <div className='hidden md:block'>
-        <Home route='/' />
+        <Home route='buy-data' />
         <Overlay top={true} opacity={0.5}>
           <div className='w-[432px] h-fit py-9 pb-0 px-6 bg-flow rounded-xl mt-8'>
             <div className='flex items-center justify-start mb-5'>

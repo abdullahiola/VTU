@@ -3,7 +3,7 @@ import {BsArrowRight} from 'react-icons/bs'
 import {CardPropsType, TransactionCardPropsType} from '../../types/card.types'
 import Icon1 from '../../assets/media/card-icon1.svg'
 
-export const TransactionCard = ({bgColor, bgImg, provider, amount, name, number}: TransactionCardPropsType) => {
+export const TransactionCard = ({bgColor, bgImg, provider, amount, name, number, plan}: TransactionCardPropsType) => {
   
   return (
     <div style={{backgroundImage: `url(${bgImg})`, backgroundColor: bgColor}} className='w-full flex flex-col min-h-[182px] justify-between rounded-lg bg-no-repeat px-[18px] pt-[30.47px] pb-[26.13px] bg-right-bottom md:px-5 md:rounded-xl'>
@@ -12,7 +12,10 @@ export const TransactionCard = ({bgColor, bgImg, provider, amount, name, number}
           <img src={Icon1} alt="" className='mb-[6.83px] w-[13.14px] h-[15.65px]' />
           <small className='text-dark-100'>{provider}</small>
         </div>
-        <p className='font-semibold'>{amount}</p>
+        <div className='flex flex-col text-right'>
+          <p className='font-semibold text-[20px] text-dark'>{amount}</p>
+          <p className='text-[12px] text-gray-500 font-medium'>{plan}</p>
+        </div>
       </div>
       <div>
         <p className='text-dark-100 mb-[2px]'>{name}</p>
