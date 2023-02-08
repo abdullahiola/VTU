@@ -32,7 +32,7 @@ const Phase4 = () => {
               <div className='w-[90px] aspect-square'><img src={Thumbs} alt="successful" /></div>
             </div>
             <div>
-              <button className='w-full py-3 px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase hover:bg-green-700 focus:bg-green-700'>Done</button>
+              <button onClick={close} className='w-full py-3 px-6 my-4 rounded-lg bg-green border-2 border-[transparent] text-white text-sm font-bold uppercase hover:bg-green-700 focus:bg-green-700'>Done</button>
               <span className=' text-gray-300 text-center w-full block'><Link to='/beneficiaries' className=' text-green text-sm underline hover:text-green-700'>Save Beneficiary?</Link></span>
             </div>
           </div>
@@ -41,7 +41,7 @@ const Phase4 = () => {
       <div className=' hidden md:block'>
         <Home route='/' />
         <Overlay top={true} opacity={0.5}>
-        <div className='w-[432px] h-fit py-9 px-6 bg-[#FFFFFF] rounded-xl mt-16'>
+        <div className='w-[432px] h-fit py-9 px-6 bg-[#FFFFFF] rounded-xl mt-8'>
           <div className='flex items-center justify-end'>
             <IoCloseSharp onClick={close} fontSize={24} className='text-gray-200 cursor-pointer' />
           </div>

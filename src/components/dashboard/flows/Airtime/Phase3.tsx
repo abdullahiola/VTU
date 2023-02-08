@@ -68,7 +68,7 @@ const Phase3 = ({}: PhasePropsType) => {
       <div className=' hidden md:block'>
         <Home route='/' />
         <Overlay top={true} opacity={0.5}>
-        <div className='w-[432px] h-fit py-9 px-6 bg-flow rounded-xl mt-16'>
+        <div className='w-[432px] h-fit py-9 px-6 bg-flow rounded-xl mt-8'>
           <div className='flex items-center justify-between mb-2'>
             <h6 className='text-[20px] md:text-xl'>Review  Transaction</h6>
             <IoCloseSharp onClick={() => navigate('/')} fontSize={24} className='text-gray-200 cursor-pointer' />

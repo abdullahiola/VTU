@@ -113,7 +113,7 @@ const Phase2 = ({}: PhasePropsType) => {
       <div className='hidden md:block'>
         <Home route='/' />
         <Overlay top={true} opacity={0.5}>
-          <div className='w-[432px] h-fit py-9 px-6 bg-flow rounded-xl mt-16'>
+          <div className='w-[432px] h-fit py-9 pb-0 px-6 bg-flow rounded-xl mt-8'>
             <div className='flex items-center justify-start mb-5'>
               <BiArrowBack onClick={prevPage} fontSize={22} className='text-[#201D1D] mr-4 cursor-pointer' />
               <h6 className='text-[20px] text-gray-500 md:text-xl'>Input  Beneficiary Details</h6>
