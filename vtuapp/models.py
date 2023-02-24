@@ -9,4 +9,3 @@ class CustomUser(models.Model):
     #define the  customer fields here
     pass
 
-        
